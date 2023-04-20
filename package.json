@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "2daEntrega.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lapresito/JLaproviteraBackEnd.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lapresito/JLaproviteraBackEnd/issues"
+  },
+  "homepage": "https://github.com/Lapresito/JLaproviteraBackEnd#readme"
+}
