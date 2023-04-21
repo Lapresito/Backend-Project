@@ -1,63 +1,78 @@
 const fs = require("fs");
 
-class ProductManager{
-    constructor(path){
+class ProductManager {
+    constructor(path) {
         this.path = path;
         this.products = [];
         this.id = 1;
-        try{
+        try {
             const productsString = fs.readFileSync(this.path, "utf-8");
             this.products = JSON.parse(productsString);
             this.id = this.products[this.products.length - 1].id + 1;
-        }
-        catch(err){
+        } catch (err) {
             if (err.code === 'ENOENT') {
                 console.log('File not found!');
-              } else {
+            } else {
                 throw err;
-              }
-            console.log('Error');
+            }
         }
 
-        
+
     }
-    getProducts(){
-        return this.products; 
+    getProducts() {
+        return this.products;
     }
-    addProduct(product){
-        
+    addProduct(product) {
+
         let checkCode = this.products.some((pCode) => pCode.code === product.code);
-        if(checkCode){
+        if (checkCode) {
             return 'Already exists a product with that code';
         }
-        if(!product.code || !product.title || !product.description || !product.price || !product.thumbnail || !product.stock){
+        if (!product.code || !product.title || !product.description || !product.price || !product.thumbnail || !product.stock) {
             return 'Empty fields, please add all the statements';
         }
-    
-        let newProduct = {...product, id: this.id};
+
+        let newProduct = {
+            id: this.id,
+            ...product
+        };
         this.products.push(newProduct);
         this.id++;
-        const productsString = JSON.stringify(this.products);
+        const productsString = JSON.stringify(this.products, null, 2);
         fs.writeFileSync(this.path, productsString);
-        return 'Product added succesfully';
+        return console.log('Product added succesfully');
     }
-    getProductsById(id){
+    getProductsById(id) {
 
         let checkId = this.products.find((pId) => pId.id === id);
-        if(!checkId){
+        if (!checkId) {
             return "Not found"
         }
         return checkId;
     }
-    updateProducts(){
-        //trabajar con array y despues escribir archivo
-        //fs.writeFileSync(this.path, productsString); Guardar en el JSON
+    updateProducts(id, product) {
+        let index = this.products.findIndex((pId) => pId.id === id);
+        if (index === -1) {
+            return "Not found"
+        } else {
+            product.id = id
+            this.products.splice(index, 1, product);
+        }
+        const productsString = JSON.stringify(this.products);
+        fs.writeFileSync(this.path, productsString);
+        return console.log(`The product with id: ${id} was updated succesfully!`);
     }
-    deleteProduct(){
-        //trabajar con array y despues escribir archivo
-        //fs.writeFileSync(this.path, productsString); Guardar en el JSON
+    deleteProduct(id) {
+        let index = this.products.findIndex((pId) => pId.id === id);
+        if (index === -1) {
+            return "Not found"
+        } else {
+            this.products.splice(index, 1);
+        }
+        const productsString = JSON.stringify(this.products);
+        fs.writeFileSync(this.path, productsString);
+        return console.log(`The product with id: ${id} was deleted succesfully!`);
     }
-
 }
 
 const productManager = new ProductManager("products.json");
@@ -70,7 +85,7 @@ const product1 = {
     price: 300,
     thumbnail: "https://static.dafiti.com.ar/p/osiris-3471-36331-1-product.jpg",
     code: 'asd123',
-    stock: 30
+    stock: 28
 }
 const product2 = {
     title: "Remera Zombie2",
@@ -83,7 +98,7 @@ const product2 = {
 const product3 = {
     title: "Remera Zombie3",
     description: "Remera talle S con diseño de zombie",
-    price: 250,
+    price: 240,
     thumbnail: "https://static.dafiti.com.ar/p/osiris-3471-36331-1-product.jpg",
     code: 'asd12324',
     stock: 20
@@ -93,7 +108,12 @@ const product3 = {
 
 
 // Tests
-productManager.addProduct(product3)
+//podes cambiar el product1 2 o 3
+// productManager.addProduct(product1)
+// productManager.addProduct(product2)
+// productManager.addProduct(product3)
+// productManager.updateProducts(1,product1)
+// productManager.deleteProduct(1)
 // console.log(productManager.addProduct(product2)) 
 // console.log(productManager.getProducts())
-// console.log(productManager.getProductsById(15))
+// console.log(productManager.getProductsById(1))
