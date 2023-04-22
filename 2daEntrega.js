@@ -8,7 +8,7 @@ class ProductManager {
         try {
             const productsString = fs.readFileSync(this.path, "utf-8");
             this.products = JSON.parse(productsString);
-            this.id = this.products[this.products.length - 1].id + 1;
+            this.id = this.products[this.products.length - 1]?.id + 1 ?? 1;
         } catch (err) {
             if (err.code === 'ENOENT') {
                 console.log('File not found!');
@@ -22,7 +22,7 @@ class ProductManager {
     getProducts() {
         return this.products;
     }
-    addProduct(product) {
+    async addProduct(product) {
 
         let checkCode = this.products.some((pCode) => pCode.code === product.code);
         if (checkCode) {
@@ -39,7 +39,7 @@ class ProductManager {
         this.products.push(newProduct);
         this.id++;
         const productsString = JSON.stringify(this.products, null, 2);
-        fs.writeFileSync(this.path, productsString);
+      await  fs.promises.writeFile(this.path, productsString);
         return console.log('Product added succesfully');
     }
     getProductsById(id) {
@@ -50,7 +50,7 @@ class ProductManager {
         }
         return checkId;
     }
-    updateProducts(id, product) {
+    async updateProducts(id, product) {
         let index = this.products.findIndex((pId) => pId.id === id);
         if (index === -1) {
             return "Not found"
@@ -59,10 +59,10 @@ class ProductManager {
             this.products.splice(index, 1, product);
         }
         const productsString = JSON.stringify(this.products);
-        fs.writeFileSync(this.path, productsString);
+        fs.promises.writeFile(this.path, productsString);
         return console.log(`The product with id: ${id} was updated succesfully!`);
     }
-    deleteProduct(id) {
+    async deleteProduct(id) {
         let index = this.products.findIndex((pId) => pId.id === id);
         if (index === -1) {
             return "Not found"
@@ -70,7 +70,7 @@ class ProductManager {
             this.products.splice(index, 1);
         }
         const productsString = JSON.stringify(this.products);
-        fs.writeFileSync(this.path, productsString);
+        fs.promises.writeFile(this.path, productsString);
         return console.log(`The product with id: ${id} was deleted succesfully!`);
     }
 }
@@ -108,8 +108,16 @@ const product3 = {
 
 
 // Tests
-//podes cambiar el product1 2 o 3
-// productManager.addProduct(product1)
+// podes cambiar el product1 2 o 3
+async function funcionsinsentido(){ // init application
+ console.log(await productManager.addProduct(product3))
+}
+funcionsinsentido()
+    // productManager.addProduct(product3).then(response => {
+    //     console.log(response)
+    // }).catch(err => {
+    //     console.log(err)
+    // })
 // productManager.addProduct(product2)
 // productManager.addProduct(product3)
 // productManager.updateProducts(1,product1)

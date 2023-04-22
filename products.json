@@ -1,5 +1,14 @@
 [
   {
+    "id": 1,
+    "title": "Remera Zombie",
+    "description": "Remera talle L con diseño de zombie",
+    "price": 300,
+    "thumbnail": "https://static.dafiti.com.ar/p/osiris-3471-36331-1-product.jpg",
+    "code": "asd123",
+    "stock": 28
+  },
+  {
     "id": 2,
     "title": "Remera Zombie2",
     "description": "Remera talle M con diseño de zombie",
@@ -16,14 +25,5 @@
     "thumbnail": "https://static.dafiti.com.ar/p/osiris-3471-36331-1-product.jpg",
     "code": "asd12324",
     "stock": 20
-  },
-  {
-    "id": 4,
-    "title": "Remera Zombie",
-    "description": "Remera talle L con diseño de zombie",
-    "price": 300,
-    "thumbnail": "https://static.dafiti.com.ar/p/osiris-3471-36331-1-product.jpg",
-    "code": "asd123",
-    "stock": 28
   }
 ]
