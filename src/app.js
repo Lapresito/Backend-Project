@@ -9,14 +9,14 @@ app.use(express.urlencoded({
 }));
 // app.use(express.static(path.resolve('public')));
 
-const port = 8080;
-const productManager = new ProductManager('./products.json')
+const PORT = 8080;
+const productManager = new ProductManager('./src/products.json')
 
-app.listen(port, () => {
-    console.log(`App listening on port http://localhost:${port}`)
+app.listen(PORT, () => {
+    console.log(`App listening on port http://localhost:${PORT}`)
 })
 
-app.get("api/products", async (req, res) => {
+app.get("/api/products", async (req, res) => {
 
     try {
         let limit = req.query.limit;
@@ -36,7 +36,7 @@ app.get("api/products", async (req, res) => {
 })
 
 
-app.get("api/products/:id", async (req, res) => {
+app.get("/api/products/:id", async (req, res) => {
 
     try {
         const id = req.params.id;
