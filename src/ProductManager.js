@@ -41,7 +41,7 @@ class ProductManager {
         this.id++;
         const productsString = JSON.stringify(this.products, null, 2);
         await fs.promises.writeFile(this.path, productsString);
-        return console.log('Product added succesfully');
+        console.log('Product added succesfully');
     }
     getProductsById(id) {
 
@@ -60,8 +60,8 @@ class ProductManager {
             this.products.splice(index, 1, product);
         }
         const productsString = JSON.stringify(this.products);
-        fs.promises.writeFile(this.path, productsString);
-        return console.log(`The product with id: ${id} was updated succesfully!`);
+        await fs.promises.writeFile(this.path, productsString);
+        console.log(`The product with id: ${id} was updated succesfully!`);
     }
     async deleteProduct(id) {
         let index = this.products.findIndex((pId) => pId.id === id);
@@ -71,8 +71,8 @@ class ProductManager {
             this.products.splice(index, 1);
         }
         const productsString = JSON.stringify(this.products);
-        fs.promises.writeFile(this.path, productsString);
-        return console.log(`The product with id: ${id} was deleted succesfully!`);
+        await fs.promises.writeFile(this.path, productsString);
+        console.log(`The product with id: ${id} was deleted succesfully!`);
     }
 }
 

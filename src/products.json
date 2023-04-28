@@ -1,92 +1,81 @@
-[
-  {
-    "id": 1,
-    "title": "Remera Zombie",
-    "description": "Remera talle L con diseño de zombie",
-    "price": 300,
-    "thumbnail": "https://static.dafiti.com.ar/p/osiris-3471-36331-1-product.jpg",
-    "code": "asd123",
-    "stock": 28
-  },
-  {
-    "id": 2,
-    "title": "Pantalón de Vestir",
-    "description": "Pantalón de vestir talle 42 color gris oscuro",
-    "price": 800,
-    "thumbnail": "https://static.dafiti.com.ar/p/sarkany-1685-40218-1-product.jpg",
-    "code": "fgh456",
-    "stock": 12
-  },
-  {
-    "id": 3,
-    "title": "Zapatillas Deportivas",
-    "description": "Zapatillas deportivas talle 42 color rojo",
-    "price": 1200,
-    "thumbnail": "https://static.dafiti.com.ar/p/nike-7401-74509-1-product.jpg",
-    "code": "jkl789",
-    "stock": 20
-  },
-  {
-    "id": 4,
-    "title": "Vestido de Fiesta",
-    "description": "Vestido de fiesta talle M color plateado",
-    "price": 2500,
-    "thumbnail": "https://static.dafiti.com.ar/p/anna-fly-5088-74419-1-product.jpg",
-    "code": "zxc432",
-    "stock": 5
-  },
-  {
-    "id": 5,
-    "title": "Shorts de Jean",
-    "description": "Shorts de jean talle 38 color azul claro",
-    "price": 400,
-    "thumbnail": "Sin imagen",
-    "code": "vbn987",
-    "stock": 18
-  },
-  {
-    "id": 6,
-    "title": "Saco de Lana",
-    "description": "Saco de lana talle L color beige",
-    "price": 1200,
-    "thumbnail": "https://static.dafiti.com.ar/p/tommy-hilfiger-3016-38951-1-product.jpg",
-    "code": "rty654",
-    "stock": 10
-  },
-  {
-    "id": 7,
-    "title": "Bufanda",
-    "description": "Bufanda de lana color rojo",
-    "price": 200,
-    "thumbnail": "Sin imagen",
-    "code": "qwe345",
-    "stock": 30
-  },
-  {
-    "id": 8,
-    "title": "Gorra de Béisbol",
-    "description": "Gorra de béisbol con logo bordado",
-    "price": 150,
-    "thumbnail": "Sin imagen",
-    "code": "poi098",
-    "stock": 20
-  },
-  {
-    "id": 9,
-    "title": "Cinturón de Cuero",
-    "description": "Cinturón de cuero color marrón oscuro",
-    "price": 250,
-    "thumbnail": "https://static.dafiti.com.ar/p/kenneth-cole-2715-0721-1-product.jpg",
-    "code": "lkj678",
-    "stock": 13
-  },
-  {
-    "id": 10,
-    "title": "Camisa Estampada",
-    "description": "Camisa de manga corta con estampado floral",
-    "price": 700,
-    "thumbnail": "Sin imagen",
-    "code": "mnb234",
-    "stock": 15
-    }
-]
+[{
+  "id": 1,
+  "title": "Remera Zombie",
+  "description": "Remera talle L con diseño de zombie",
+  "price": 300,
+  "thumbnail": "https://static.dafiti.com.ar/p/osiris-3471-36331-1-product.jpg",
+  "code": "asd123",
+  "stock": 28
+}, {
+  "id": 2,
+  "title": "Pantalón de Vestir",
+  "description": "Pantalón de vestir talle 42 color gris oscuro",
+  "price": 800,
+  "thumbnail": "https://static.dafiti.com.ar/p/sarkany-1685-40218-1-product.jpg",
+  "code": "fgh456",
+  "stock": 12
+}, {
+  "id": 3,
+  "title": "Zapatillas Deportivas",
+  "description": "Zapatillas deportivas talle 42 color rojo",
+  "price": 1200,
+  "thumbnail": "https://static.dafiti.com.ar/p/nike-7401-74509-1-product.jpg",
+  "code": "jkl789",
+  "stock": 20
+}, {
+  "id": 4,
+  "title": "Vestido de Fiesta",
+  "description": "Vestido de fiesta talle M color plateado",
+  "price": 2500,
+  "thumbnail": "https://static.dafiti.com.ar/p/anna-fly-5088-74419-1-product.jpg",
+  "code": "zxc432",
+  "stock": 5
+}, {
+  "id": 5,
+  "title": "Shorts de Jean",
+  "description": "Shorts de jean talle 38 color azul claro",
+  "price": 400,
+  "thumbnail": "Sin imagen",
+  "code": "vbn987",
+  "stock": 18
+}, {
+  "id": 6,
+  "title": "Saco de Lana",
+  "description": "Saco de lana talle L color beige",
+  "price": 1200,
+  "thumbnail": "https://static.dafiti.com.ar/p/tommy-hilfiger-3016-38951-1-product.jpg",
+  "code": "rty654",
+  "stock": 10
+}, {
+  "id": 7,
+  "title": "Bufanda",
+  "description": "Bufanda de lana color rojo",
+  "price": 200,
+  "thumbnail": "Sin imagen",
+  "code": "qwe345",
+  "stock": 30
+}, {
+  "id": 8,
+  "title": "Gorra de Béisbol",
+  "description": "Gorra de béisbol con logo bordado",
+  "price": 150,
+  "thumbnail": "Sin imagen",
+  "code": "poi098",
+  "stock": 20
+}, {
+  "id": 9,
+  "title": "Cinturón de Cuero",
+  "description": "Cinturón de cuero color marrón oscuro",
+  "price": 250,
+  "thumbnail": "https://static.dafiti.com.ar/p/kenneth-cole-2715-0721-1-product.jpg",
+  "code": "lkj678",
+  "stock": 13
+}, {
+  "id": 10,
+  "title": "Camisa Estampada",
+  "description": "Camisa de manga corta con estampado floral",
+  "price": 700,
+  "thumbnail": "Sin imagen",
+  "code": "mnb234",
+  "stock": 15
+}]
