@@ -4,15 +4,12 @@ const fs = require("fs");
 class ProductManager {
     constructor(path) {
         this.path = path;
-        this.id = 1;
     }
     async readDataFile(){
         try {
             if(fs.existsSync(this.path)){
                 const productsString = await fs.promises.readFile(this.path, "utf-8");
-                const products = JSON.parse(productsString)
-                this.id = products[products.length - 1]?.id + 1 ?? 1;
-                return products
+                return JSON.parse(productsString)
             }
             await fs.promises.writeFile(this.path, JSON.stringify([]));
             return [];
@@ -39,13 +36,14 @@ class ProductManager {
             if (!product.code || !product.title || !product.description || !product.price || !product.thumbnail || !product.stock) {
                 throw new Error('Empty fields, please add all the statements');
             }
-    
-            let newProduct = {
-                id: this.id,
+
+            let id = products.length > 0 ? products[products.length - 1].id + 1 : 1;
+
+            products.push({
+                id,
                 ...product
-            };
-            products.push(newProduct);
-            this.id++;
+            });
+
             const productsString = JSON.stringify(products, null, 2);
             await fs.promises.writeFile(this.path, productsString);
             console.log('Product added succesfully');
@@ -111,5 +109,4 @@ class ProductManager {
         }
     }
 }
-
 module.exports = ProductManager
