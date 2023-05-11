@@ -34,9 +34,11 @@ class CartsManager {
                 id,
                 products: []
             });
+            let newCart = carts.find((cId) => cId.id === id);
             const cartsString = JSON.stringify(carts, null, 2);
             await fs.promises.writeFile(this.path, cartsString);
             console.log('Cart was created succesfully');
+            return newCart
         } catch (error) {
             throw new Error(error.message);
         }
@@ -103,6 +105,40 @@ class CartsManager {
         } catch (error) {
             throw new Error(error.message);
         }
+    }
+
+    async deleteProductFromCart(productId, cartId){
+        try {
+            let carts = await this.readDataFile();
+            let productsFile = await productManager.readDataFile();
+        
+            // verificar si el producto existe
+            let checkPId = productsFile.find((pId) => pId.id === productId);
+            if (!checkPId) {
+              throw new Error("Invalid id, product not found");
+            }
+        
+            // quitar o actualizar producto en el carrito
+            let findedCart = carts.find((c) => c.id === cartId);
+            if (findedCart) {
+              let findedProduct = findedCart.products.find((p) => p.id === productId);
+              if (findedProduct) {
+                if(findedProduct.quantity === 1){
+                    findedCart.products.splice(findedCart.products.indexOf(findedProduct), 1);
+                }else{
+                    findedProduct.quantity -= 1;
+                }
+              } else {
+                throw new Error(`Product with id: ${productId} was not found in the cart with id:${cartId}`)
+              }
+              await fs.promises.writeFile(this.path, JSON.stringify(carts));
+              console.log(`Product ${productId} was deleted succesfully from cart ${cartId}`);
+            } else {
+              throw new Error("Invalid id, cart not found");
+            }
+          } catch (error) {
+            throw new Error(error.message);
+          }
     }
 }
 module.exports = CartsManager
