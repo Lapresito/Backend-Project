@@ -1,0 +1,19 @@
+.products{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+    border: solid 3px blue;
+    border-radius: 5%;
+}
+.articles{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.articles.img{
+    width: 80px;
+    height: 160px;
+}
