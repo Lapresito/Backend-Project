@@ -1,0 +1,49 @@
+<div class="paragraph">
+    todo listo para trabajar con sockets
+</div>
+
+<form action="">
+    <label for="title">
+        Enter product title:
+        <input type="text" name="title" id="title">
+    </label>
+    <label for="description">
+        Enter product description:
+        <input type="text" name="description" id="description">
+    </label>
+    <label for="price">
+        Enter product price:
+        <input type="text" name="price" id="price">
+    </label>
+    <label for="code">
+        Enter product code:
+        <input type="text" name="code" id="code">
+    </label>
+    <label for="category">
+        <select id="category">
+            <option value="Clothes">Clothes</option>
+            <option value="Shoes">Shoes</option>
+            <option value="Bags">Bags</option>
+        </select>
+    </label>
+    <label class="file-label">
+        <input type="file" class="file-input" name="thumbnail">
+        <span class="file-cta"></span>
+    </label>
+</form>
+
+<div class="products">
+    <h1>Products list</h1>
+    {{#each products}}
+    <article class="articles">
+        <h2>{{this.title}}</h2>
+        <img src={{this.thumbnail}} alt="">
+        <h3>Price: {{this.price}}</h4>
+        <p>Stock: {{this.stock}}</p>
+    </article>
+    {{/each}}
+</div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>

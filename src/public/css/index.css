@@ -17,3 +17,9 @@
     width: 80px;
     height: 160px;
 }
+
+body {
+    margin:0px;
+    height:100vh;
+    background: #1283da;
+  }
