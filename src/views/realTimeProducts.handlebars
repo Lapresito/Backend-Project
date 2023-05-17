@@ -1,12 +1,11 @@
-
 <div id="bodyRT">
     <div id="products">
-        <div id="dynamicProducts">
+        <div id="dynamicProducts" >
             <h1>Products list</h1>
                 {{#each products}}
-                <div id={{this.id}}>
+                <div id={{this.id}} style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: solid 3px blue; width: 100%">
                     <h2>{{this.title}}</h2>
-                    <img src={{this.thumbnail}} alt="">
+                    <img src={{this.thumbnail}} style="max-width: 100px; max-height: 200px">
                     <h3>Price: {{this.price}}</h4>
                     <p>Stock: {{this.stock}}</p>
                     <button onclick="deleteProduct({{this.id}})">Delete</button>
@@ -16,7 +15,7 @@
     </div>
     <div id="formForNewProduct">
         <h3>Fill the form to upload a new product</h3>
-        <form action="" id="form.products">
+        <form id="form.products">
             <label for="title">
                  Enter product title:
                 <input type="text" name="title" id="title" placeholder="Title">

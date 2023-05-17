@@ -1,43 +1,56 @@
-<form action="">
-    <label for="title">
-        Enter product title:
-        <input type="text" name="title" id="title">
-    </label>
-    <label for="description">
-        Enter product description:
-        <input type="text" name="description" id="description">
-    </label>
-    <label for="price">
-        Enter product price:
-        <input type="text" name="price" id="price">
-    </label>
-    <label for="code">
-        Enter product code:
-        <input type="text" name="code" id="code">
-    </label>
-    <label for="category">
-        <select id="category">
-            <option value="Clothes">Clothes</option>
-            <option value="Shoes">Shoes</option>
-            <option value="Bags">Bags</option>
-        </select>
-    </label>
-    <label class="file-label">
-        <input type="file" class="file-input" name="thumbnail">
-        <span class="file-cta"></span>
-    </label>
-</form>
 
-
-
-{{!-- <div class="products">
-    <h1>Products list</h1>
-    {{#each products}}
-    <article class="articles">
-        <h2>{{this.title}}</h2>
-        <img src={{this.thumbnail}} alt="">
-        <h3>Price: {{this.price}}</h4>
-        <p>Stock: {{this.stock}}</p>
-    </article>
-    {{/each}}
-</div> --}}
+<div id="bodyRT">
+    <div id="products">
+        <div id="dynamicProducts">
+            <h1>Products list</h1>
+                {{#each products}}
+                <div id={{this.id}} style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: solid 3px blue; width: 100%">
+                    <h2>{{this.title}}</h2>
+                    <img src={{this.thumbnail}} style="max-width: 100px; max-height: 200px">
+                    <h3>Price: {{this.price}}</h4>
+                    <p>Stock: {{this.stock}}</p>
+                    <button onclick="deleteProduct({{this.id}})">Delete</button>
+                </div>
+                {{/each}}
+        </div>
+    </div>
+    <div id="formForNewProduct">
+        <h3>Fill the form to upload a new product</h3>
+        <form action="" id="form.products">
+            <label for="title">
+                 Enter product title:
+                <input type="text" name="title" id="title" placeholder="Title">
+            </label>    
+            <label for="description">
+                 Enter product description:
+                <input type="text" name="description" id="description" placeholder="Description">
+            </label>
+            <label for="price">
+                 Enter product price:
+                <input type="number" name="price" id="price" placeholder="Price">
+            </label>
+            <label for="stock">
+                 Enter product stock:
+                <input type="number" name="stock" id="stock" placeholder="Stock">
+            </label>
+            <label for="code">
+                 Enter product code:
+                <input type="text" name="code" id="code" placeholder="Code">
+            </label>
+            <label for="category">
+                 Select category
+                <select id="category">
+                    <option value="Clothes">Clothes</option>
+                    <option value="Shoes">Shoes</option>
+                    <option value="Bags">Bags</option>
+                </select>
+            </label>
+            <label for="thumbnail">
+                <input type="text" id="thumbnail" name="thumbnail" placeholder="URL">
+            </label>
+            <label for="send">
+                <input type="submit" id="send" value="Send">
+            </label>
+        </form>
+    </div>
+</div>
