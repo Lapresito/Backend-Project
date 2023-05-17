@@ -1,4 +1,5 @@
-[{
+[
+  {
     "id": 1,
     "title": "Remera Zombie",
     "description": "Remera talle L con diseño de zombie",
@@ -8,7 +9,8 @@
     "stock": 28,
     "status": true,
     "category": "Clothes"
-}, {
+  },
+  {
     "id": 2,
     "title": "Pantalón de Vestir",
     "description": "Pantalón de vestir talle 42 color gris oscuro",
@@ -18,7 +20,8 @@
     "stock": 12,
     "status": true,
     "category": "Clothes"
-}, {
+  },
+  {
     "id": 3,
     "title": "Zapatillas Deportivas",
     "description": "Zapatillas deportivas talle 42 color negro",
@@ -28,7 +31,8 @@
     "stock": 20,
     "status": true,
     "category": "Clothes"
-}, {
+  },
+  {
     "id": 4,
     "title": "Top Deportivo",
     "description": "Top Deportivo talle M color celeste",
@@ -38,7 +42,8 @@
     "stock": 5,
     "status": true,
     "category": "Clothes"
-}, {
+  },
+  {
     "id": 5,
     "title": "Shorts de Jean",
     "description": "Shorts de jean talle 38 color azul",
@@ -48,7 +53,8 @@
     "stock": 18,
     "status": true,
     "category": "Clothes"
-}, {
+  },
+  {
     "id": 6,
     "title": "Saco de Lana",
     "description": "Saco de lana talle L color gris",
@@ -58,7 +64,8 @@
     "stock": 10,
     "status": true,
     "category": "Clothes"
-}, {
+  },
+  {
     "id": 7,
     "title": "Bufanda",
     "description": "Bufanda de lana a cuadros",
@@ -68,7 +75,8 @@
     "stock": 30,
     "status": true,
     "category": "Clothes"
-}, {
+  },
+  {
     "id": 8,
     "title": "Gorra de Pescador",
     "description": "Gorra de pescador color beige",
@@ -78,7 +86,8 @@
     "stock": 20,
     "status": true,
     "category": "Clothes"
-}, {
+  },
+  {
     "id": 9,
     "title": "Cinturón de Cuero",
     "description": "Cinturón de cuero color marrón oscuro",
@@ -88,7 +97,8 @@
     "stock": 13,
     "status": true,
     "category": "Clothes"
-}, {
+  },
+  {
     "id": 10,
     "title": "Camisa Estampada",
     "description": "Camisa de manga corta con estampado floral",
@@ -98,7 +108,8 @@
     "stock": 15,
     "status": true,
     "category": "Clothes"
-}, {
+  },
+  {
     "id": 11,
     "title": "Camperon",
     "description": "Camperon de invierno color negro",
@@ -108,4 +119,5 @@
     "stock": 45,
     "category": "Clothes",
     "status": true
-}]
+  }
+]

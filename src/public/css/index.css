@@ -23,3 +23,15 @@ body {
     height:100vh;
     background: #1283da;
   }
+
+#bodyRT{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#form.products{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}

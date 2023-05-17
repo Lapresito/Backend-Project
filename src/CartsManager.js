@@ -68,13 +68,13 @@ class CartsManager {
           }
       
           // agregar o actualizar producto en el carrito
-          let findedCart = carts.find((c) => c.id === cartId);
-          if (findedCart) {
-            let findedProduct = findedCart.products.find((p) => p.id === productId);
+          let foundCart = carts.find((c) => c.id === cartId);
+          if (foundCart) {
+            let findedProduct = foundCart.products.find((p) => p.id === productId);
             if (findedProduct) {
               findedProduct.quantity += 1;
             } else {
-              findedCart.products.push({
+              foundCart.products.push({
                 id: productId,
                 quantity: 1,
               });
