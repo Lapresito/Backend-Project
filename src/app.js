@@ -49,6 +49,15 @@ socketServer.on('connection', async (socket) => {
            throw new Error(error.message) 
         }
     });
+    socket.on('deleteProduct', async (id)=>{
+        try {
+            await productManager.deleteProduct(id)
+            const products = await productManager.readDataFile();
+            socketServer.emit('updatedProducts', products);
+        } catch (error) {
+            throw new Error(error.message) 
+        }
+    })
 });
 
 app.get("*", (req, res) => {

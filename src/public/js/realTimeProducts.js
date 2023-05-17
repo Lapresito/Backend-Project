@@ -22,10 +22,13 @@ formNewProduct.addEventListener("submit", (e) => {
         try {
             console.log(data);
             document.getElementById("dynamicProducts").innerHTML = data.reduce((acc, item) => {
-                return acc + `<h2>${item.title}</h2>
+                return acc + `<div id=${item.id}>
+                <h2>${item.title}</h2>
                 <img src="${item.thumbnail}" alt="">
                 <h3>Price: ${item.price}</h3>
-                <p>Stock: ${item.stock}</p>`;
+                <p>Stock: ${item.stock}</p>
+                <button onclick="deleteProduct(${item.id})" > Delete </button>
+                </div>`;
             }, '');
         } catch (error) {
             throw new Error(error.message)
@@ -36,5 +39,23 @@ formNewProduct.addEventListener("submit", (e) => {
 });
 
 
+function deleteProduct(id){
 
-// Recibo nueva lista
+    socket.emit("deleteProduct", id)
+    socket.on('updatedProducts', (data) => {
+        try {
+            console.log(data);
+            document.getElementById("dynamicProducts").innerHTML = data.reduce((acc, item) => {
+                return acc + `<div id=${item.id}>
+                <h2>${item.title}</h2>
+                <img src="${item.thumbnail}" alt="">
+                <h3>Price: ${item.price}</h3>
+                <p>Stock: ${item.stock}</p>
+                <button onclick="deleteProduct(${item.id})" > Delete </button>
+                </div>`;
+            }, '');
+        } catch (error) {
+            throw new Error(error.message)
+        }
+    })
+}
