@@ -1,7 +1,7 @@
-const express = require('express');
-const productsRouter = express.Router();
-const ProductManager = require('../ProductManager.js');
+import express from 'express';
+import ProductManager from '../ProductManager.js'
 
+const productsRouter = express.Router();
 const productManager = new ProductManager('./src/products.json');
 
 productsRouter.get("/", async (req, res) => {
@@ -76,4 +76,4 @@ productsRouter.put("/:id", async (req, res)=>{
     }
 })
 
-module.exports = productsRouter
+export default productsRouter;

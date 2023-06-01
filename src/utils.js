@@ -1,20 +1,27 @@
-const multer = require("multer");
-const path = require("path");
-const { fileURLToPath } = require("url");
-const { connect } = require("mongoose");
+//----------------MULTER------------------------------
+import multer from 'multer';
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join( __dirname + "/public"));
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, 'public'));
   },
-  filename: function (req, file, cb) {
+  filename: (req, file, cb) => {
     cb(null, file.originalname);
   },
 });
 
+export const uploader = multer({ storage });
+
+//----------------DIRNAME------------------------------
+import path from 'path';
+import { fileURLToPath } from 'url';
+export const __filename = fileURLToPath(import.meta.url);
+export const __dirname = path.dirname(__filename);
 
 
-async function connectMongo() {
+//---------------MONGO---------------------------------
+import { connect, Schema, model } from 'mongoose';
+export async function connectMongo() {
   try {
     await connect(
       "mongodb+srv://joacolaprovitera:nDKDmuv3K3y9DCwX@backend-coder.uwjcypw.mongodb.net/ecommerce?retryWrites=true&w=majority"
@@ -26,10 +33,4 @@ async function connectMongo() {
   }
 };
 
-module.exports = { connectMongo: connectMongo };
-module.exports.uploader = multer({ storage });
 
-// Porque al agregar estas exportaciones se rompe el codigo?
-
-// module.exports.__filename = fileURLToPath(require.main.filename);
-// module.exports.__dirname = path.dirname(module.exports.__filename);

@@ -1,15 +1,15 @@
-const express = require('express');
-const { Server } = require('socket.io');
-const productsRouter = require('./routes/products.router.js');
-const cartsRouter = require('./routes/carts.router.js');
-const viewsRouter = require('./routes/views.router.js');
-const realTimeProductsRouter = require('./routes/realTimeProducts.router.js');
-const path = require('path');
-const handlebars = require('express-handlebars');
-const ProductManager = require("./ProductManager");
-const productManager = new ProductManager('./src/products.json');
-const { connectMongo } = require("./utils.js");
+import express from 'express';
+import { Server } from 'socket.io';
+import productsRouter from './routes/products.router.js';
+import cartsRouter from './routes/carts.router.js';
+import viewsRouter from './routes/views.router.js';
+import realTimeProductsRouter from './routes/realTimeProducts.router.js';
+import path from 'path';
+import handlebars from 'express-handlebars';
+import { __dirname, connectMongo} from "./utils.js";
 
+import ProductManager from "./ProductManager.js";
+const productManager = new ProductManager('./src/products.json');
 
 const app = express();
 const PORT = 8080;

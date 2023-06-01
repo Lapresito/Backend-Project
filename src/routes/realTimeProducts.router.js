@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 const rTProducts = express.Router();
-const ProductManager = require('../ProductManager');
+import ProductManager from '../ProductManager.js';
 
 const productManager = new ProductManager('./src/products.json');
 
@@ -21,4 +21,4 @@ rTProducts.get("/realTimeProducts", async (req, res) => {
 
 
 
-module.exports = rTProducts;
+export default rTProducts;

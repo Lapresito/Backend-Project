@@ -1,7 +1,7 @@
-const express = require('express');
-const cartsRouter = express.Router();
-const CartsManager = require('../CartsManager.js');
+import express from 'express';
+import CartsManager from '../CartsManager.js';
 
+const cartsRouter = express.Router();
 const cartsManager = new CartsManager('./src/carts.json');
 
 
@@ -97,4 +97,4 @@ cartsRouter.delete("/:cid/product/:pid", async (req, res) => {
 })
 
 
-module.exports = cartsRouter;
+export default cartsRouter;

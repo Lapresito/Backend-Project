@@ -1,5 +1,5 @@
-const fs = require("fs");
-const ProductManager = require('./ProductManager.js');
+import fs from "fs";
+import ProductManager from './ProductManager.js';
 
 const productManager = new ProductManager('./src/products.json');
 
@@ -141,4 +141,4 @@ class CartsManager {
           }
     }
 }
-module.exports = CartsManager
+export default CartsManager;
