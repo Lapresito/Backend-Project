@@ -1,18 +1,20 @@
 const express = require('express');
-const {
-    Server
-} = require('socket.io')
+const { Server } = require('socket.io');
 const productsRouter = require('./routes/products.router.js');
-const cartsRouter = require('./routes/carts.router.js')
-const viewsRouter = require('./routes/views.router.js')
-const realTimeProductsRouter = require('./routes/realTimeProducts.router.js')
+const cartsRouter = require('./routes/carts.router.js');
+const viewsRouter = require('./routes/views.router.js');
+const realTimeProductsRouter = require('./routes/realTimeProducts.router.js');
 const path = require('path');
-const handlebars = require('express-handlebars')
-const ProductManager = require("./ProductManager")
-const productManager = new ProductManager('./src/products.json')
+const handlebars = require('express-handlebars');
+const ProductManager = require("./ProductManager");
+const productManager = new ProductManager('./src/products.json');
+const { connectMongo } = require("./utils.js");
+
 
 const app = express();
 const PORT = 8080;
+
+connectMongo();
 
 app.use(express.json());
 app.use(express.urlencoded({
@@ -29,7 +31,7 @@ app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 
 app.use('/', viewsRouter);
-app.use('/', realTimeProductsRouter)
+app.use('/', realTimeProductsRouter);
 
 const httpServer = app.listen(PORT, () => {
     console.log(__dirname);
