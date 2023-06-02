@@ -1,0 +1,91 @@
+[{
+    "title": "Remera Zombie",
+    "description": "Remera talle L con diseño de zombie",
+    "price": 300,
+    "thumbnail": "https://static.dafiti.com.ar/p/osiris-3471-36331-1-product.jpg",
+    "code": "asd123",
+    "stock": 28,
+    "status": true,
+    "category": "Clothes"
+}, {
+    "title": "Pantalón de Vestir",
+    "description": "Pantalón de vestir talle 42 color gris oscuro",
+    "price": 800,
+    "thumbnail": "https://static.dafiti.com.ar/p/vinson-5746-756413-1-product.jpg",
+    "code": "fgh456",
+    "stock": 12,
+    "status": true,
+    "category": "Clothes"
+}, {
+    "title": "Zapatillas Deportivas",
+    "description": "Zapatillas deportivas talle 42 color negro",
+    "price": 1200,
+    "thumbnail": "https://static.dafiti.com.ar/p/adidas-1843-222259-1-product.jpg",
+    "code": "jkl789",
+    "stock": 20,
+    "status": true,
+    "category": "Clothes"
+}, {
+    "title": "Top Deportivo",
+    "description": "Top Deportivo talle M color celeste",
+    "price": 2500,
+    "thumbnail": "https://static.dafiti.com.ar/p/adidas-9750-9233221-1-product.jpg",
+    "code": "zxc432",
+    "stock": 5,
+    "status": true,
+    "category": "Clothes"
+}, {
+    "title": "Shorts de Jean",
+    "description": "Shorts de jean talle 38 color azul",
+    "price": 400,
+    "thumbnail": "https://static.dafiti.com.ar/p/mistral-7216-288219-1-product.jpg",
+    "code": "vbn987",
+    "stock": 18,
+    "status": true,
+    "category": "Clothes"
+}, {
+    "title": "Saco de Lana",
+    "description": "Saco de lana talle L color gris",
+    "price": 1200,
+    "thumbnail": "https://static.dafiti.com.ar/p/mochi-8676-463289-1-product.jpg",
+    "code": "rty654",
+    "stock": 10,
+    "status": true,
+    "category": "Clothes"
+}, {
+    "title": "Bufanda",
+    "description": "Bufanda de lana a cuadros",
+    "price": 200,
+    "thumbnail": "https://static.dafiti.com.ar/p/47st-dft-6482-132319-1-product.jpg",
+    "code": "qwe345",
+    "stock": 30,
+    "status": true,
+    "category": "Clothes"
+}, {
+    "title": "Gorra de Pescador",
+    "description": "Gorra de pescador color beige",
+    "price": 150,
+    "thumbnail": "https://static.dafiti.com.ar/p/mistral-4912-8560421-1-product.jpg",
+    "code": "poi098",
+    "stock": 20,
+    "status": true,
+    "category": "Clothes"
+}, {
+    "title": "Cinturón de Cuero",
+    "description": "Cinturón de cuero color marrón oscuro",
+    "price": 250,
+    "thumbnail": "https://static.dafiti.com.ar/p/vinson-1377-464374-1-product.jpg",
+    "code": "lkj678",
+    "stock": 13,
+    "status": true,
+    "category": "Clothes"
+}, {
+    "title": "Camisa Estampada",
+    "description": "Camisa de manga corta con estampado floral",
+    "price": 700,
+    "thumbnail": "https://static.dafiti.com.ar/p/levis-9345-600869-1-product.jpg",
+    "code": "mnb234",
+    "stock": 15,
+    "status": true,
+    "category": "Clothes"
+}]

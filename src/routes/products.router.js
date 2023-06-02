@@ -1,13 +1,13 @@
 import express from 'express';
-import ProductManager from '../ProductManager.js'
+import { ProductService } from '../services/products.service.js';
 
 const productsRouter = express.Router();
-const productManager = new ProductManager('./src/products.json');
+const productService = new ProductService();
 
 productsRouter.get("/", async (req, res) => {
     try {
         let limit = req.query.limit;
-        const products = await productManager.readDataFile();
+        const products = await productService.getAll();
         if (!limit) {
             return res.status(200).json({status: "success",
             message: "Products list",
@@ -29,7 +29,7 @@ productsRouter.get("/:id", async (req, res) => {
 
     try {
         const id = req.params.id;
-        const product = await productManager.getProductsById(parseInt(id));
+        const product = await productService.getProductById(id);
         res.status(200).json({status:"success",
         message: `Product with id:${id}`, payload: product})
 
@@ -42,7 +42,7 @@ productsRouter.get("/:id", async (req, res) => {
 productsRouter.post("/", async (req, res) => {
     try {
         const product = req.body
-        await productManager.addProduct(product)
+        await productService.addProduct(product)
         res.status(201).json({status:"success",message: 'Added successfuly', payload: product })
     } catch (error) {
         res.status(400).json({status: "error", error: error.message})
@@ -51,7 +51,7 @@ productsRouter.post("/", async (req, res) => {
 productsRouter.delete("/:id", async (req, res)=>{
     try {
         const id = req.params.id;
-        const product = await productManager.deleteProduct(parseInt(id));
+        const product = await productService.deleteProduct(id);
         res.status(200).json({status:"success", message: `The product with id: ${id} was deleted succesfully!`, payload: product
         })
     } catch (error) {
@@ -65,7 +65,7 @@ productsRouter.put("/:id", async (req, res)=>{
     try {
         const id = req.params.id;
         const productByUser = req.body
-        const product = await productManager.updateProducts(parseInt(id), productByUser);
+        const product = await productService.updateProduct(id, productByUser);
         res.status(200).json({status: "success", message: `The product with id: ${id} was updated succesfully!`, payload: product
         })
     } catch (error) {
