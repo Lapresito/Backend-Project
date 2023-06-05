@@ -1,6 +1,4 @@
-import {
-    ProductModel
-} from "../dao/models/products.model.js";
+import { ProductModel } from "../dao/models/products.model.js";
 
 export class ProductService {
     async getAll() {
@@ -37,8 +35,9 @@ export class ProductService {
                 thumbnail: product.thumbnail,
                 code: product.code,
                 stock: product.stock,
+                status: true,
                 category: product.category,
-                status: true
+                
             });
             console.log(`Product ${product.title} added succesfully`);
             return newProduct;
@@ -49,9 +48,7 @@ export class ProductService {
     }
     async getProductById(_id) {
         try {
-            const product = await ProductModel.findOne({
-                _id
-            });
+            const product = await ProductModel.findOne({ _id });
             return product;
         } catch (error) {
             throw new Error(error.message);
