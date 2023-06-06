@@ -1,20 +1,23 @@
 import express from 'express';
+const rTProducts = express.Router();
 import { ProductService } from '../services/products.service.js';
 
-const viewsRouter = express.Router();
-const productService = new ProductService()
+const productService = new ProductService;
 
+//BACK-END
 
-viewsRouter.get('/', async (req, res)=>{
+rTProducts.get("/realtimeproducts", async (req, res) => {
     try {
         let products = await productService.getAll();
-        res.render('home',{
+        return res.render('realtimeproducts', {
             products: products
-        });
+        })
     } catch (error) {
         throw new Error(error.message)
     }
-
 })
 
-export default viewsRouter;
+
+
+
+export default rTProducts;

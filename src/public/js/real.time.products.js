@@ -1,5 +1,4 @@
 // FRONT-END
-
 const socket = io()
 
 //Data ingresada input
@@ -25,12 +24,12 @@ formNewProduct.addEventListener("submit", (e) => {
         try {
             console.log(data);
             document.getElementById("dynamicProducts").innerHTML = data.reduce((acc, item) => {
-                return acc + `<div id=${item.id} style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: solid 3px blue; width: 100%">
+                return acc + `<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: solid 3px blue; width: 100%">
                 <h2>${item.title}</h2>
                 <img src="${item.thumbnail}" style="max-width: 100px; max-height: 200px">
                 <h3>Price: ${item.price}</h3>
                 <p>Stock: ${item.stock}</p>
-                <button onclick="deleteProduct(${item.id})" > Delete </button>
+                <button onclick="deleteProduct('${item._id}')" > Delete </button>
                 </div>`;
             }, '');
         } catch (error) {
@@ -42,19 +41,19 @@ formNewProduct.addEventListener("submit", (e) => {
 });
 
 
-function deleteProduct(id){
+function deleteProduct(_id){
 
-    socket.emit("deleteProduct", id)
+    socket.emit("deleteProduct", _id)
     socket.on('updatedProducts', (data) => {
         try {
             console.log(data);
             document.getElementById("dynamicProducts").innerHTML = data.reduce((acc, item) => {
-                return acc + `<div id=${item.id} style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: solid 3px blue; width: 100%">
+                return acc + `<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: solid 3px blue; width: 100%">
                 <h2>${item.title}</h2>
                 <img src="${item.thumbnail}" style="max-width: 100px; max-height: 200px">
                 <h3>Price: ${item.price}</h3>
                 <p>Stock: ${item.stock}</p>
-                <button onclick="deleteProduct(${item.id})" > Delete </button>
+                <button onclick="deleteProduct('${item._id}')" > Delete </button>
                 </div>`;
             }, '');
         } catch (error) {

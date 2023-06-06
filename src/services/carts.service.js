@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { CartModel } from "../dao/models/carts.model.js";
 import { ProductService } from "./products.service.js";
-const productService = new ProductService
+const productService = new ProductService();
 
 export class CartService{
 
@@ -49,9 +49,7 @@ export class CartService{
           }
 
           let carts = await this.getAll();
-          console.log(carts)
           let checkCId = carts.find((cId)=> cId._id.equals(cartId));
-          console.log(checkCId)
           if(!checkCId){
             throw new Error("Invalid id, cart not found");
           }
@@ -75,9 +73,7 @@ export class CartService{
       async deleteProductFromCart(productId, cartId) {
         try {
           let carts = await this.getAll();
-          console.log(carts);
           let checkCId = carts.find((cId)=> cId._id.equals(cartId));
-          console.log(checkCId)
           if(!checkCId){
             throw new Error("Invalid id, cart not found");
           }
