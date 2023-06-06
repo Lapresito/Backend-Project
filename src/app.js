@@ -2,8 +2,7 @@ import express from 'express';
 import productsRouter from './routes/products.router.js';
 import cartsRouter from './routes/carts.router.js';
 import viewsRouter from './routes/views.router.js';
-import realTimeProductsRouter from './routes/real.time.products.router.js';
-import chatRouter from './routes/chat.router.js';
+import realtimeRouter from './routes/realtime.router.js';
 import path from 'path';
 import handlebars from 'express-handlebars';
 import { __dirname } from "./utils/dirname.js";
@@ -31,8 +30,8 @@ app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 
 app.use('/', viewsRouter);
-app.use('/', realTimeProductsRouter);
-app.use('/', chatRouter);
+app.use('/', realtimeRouter);
+
 
 const httpServer = app.listen(PORT, () => {
     console.log(__dirname);

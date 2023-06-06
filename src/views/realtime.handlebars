@@ -13,8 +13,24 @@
                 {{/each}}
         </div>
     </div>
+
+    <div class="chat">
+        <h1>Chat online</h1>
+            <div id="chat-box">
+                {{#each messages}}
+                <div class="oneUserMsg">
+                    <h3>{{this.user}}</h3>
+                    <p>{{this.message}}</p>
+                </div>
+                {{/each}}
+            </div>
+        <div>
+            <input type="text" id="type-place" placeholder="Type your message...">
+        </div>
+    </div>
+
     <div id="formForNewProduct">
-        <h3>Fill the form to upload a new product</h3>
+        <h1>Fill the form to upload a new product</h1>
         <form id="form.products">
             <label for="title">
                  Enter product title:
@@ -53,5 +69,8 @@
         </form>
     </div>
 </div>
+
+
 <script src="/socket.io/socket.io.js"></script>
-<script src="/js/real.time.products.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/index.js"></script>

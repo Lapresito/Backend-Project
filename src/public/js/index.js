@@ -1,8 +1,7 @@
 // FRONT-END
 const socket = io()
 
-//Data ingresada input
-
+// Real time products
 const formNewProduct = document.getElementById("form.products")
 
 formNewProduct.addEventListener("submit", (e) => {
@@ -54,10 +53,50 @@ function deleteProduct(_id){
                 <h3>Price: ${item.price}</h3>
                 <p>Stock: ${item.stock}</p>
                 <button onclick="deleteProduct('${item._id}')" > Delete </button>
-                </div>`;
+                </div>`; 
             }, '');
         } catch (error) {
             throw new Error(error.message)
         }
     })
 }
+
+//Chat 
+
+
+let userEmail = '';
+async function getEmail(){
+    const { value: email } = await Swal.fire({
+      title: 'Input email address to chat',
+      input: 'email',
+      inputLabel: 'Your email address',
+      inputPlaceholder: 'Enter your email address'
+    });
+  
+    if (email) {
+      Swal.fire(`Entered email: ${email}`);
+    }
+  
+    userEmail = email;
+  }
+getEmail();
+
+const typePlace = document.getElementById('type-place');
+typePlace.addEventListener('keyup', ({ key }) =>{
+    if(key === 'Enter'){
+        socket.emit('newMessage', {
+            user: userEmail,
+            message: typePlace.value
+        })
+        typePlace.value = ''
+    }});
+
+    socket.on('updatedMessages', (newMessage)=>{   
+            document.getElementById("chat-box").innerHTML = newMessage.reduce((acc, item) => {
+                return acc + `<div class="oneUserMsg">
+                <h3>${item.user}</h2>
+                <p>${item.message}</p>
+                </div>`; 
+            }, '');
+    })
+    

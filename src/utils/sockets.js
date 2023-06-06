@@ -1,6 +1,8 @@
 import { Server } from 'socket.io';
 import { ProductService } from '../services/products.service.js';
 const productService = new ProductService();
+import { ChatService } from '../services/chat.service.js';
+const chatService = new ChatService();
 
 export function connectSocket(httpServer){
   const socketServer = new Server(httpServer);
@@ -25,6 +27,15 @@ export function connectSocket(httpServer){
           } catch (error) {
               throw new Error(error.message); 
           }
+      });
+      socket.on('newMessage', async (msg)=>{
+        try {
+            await chatService.newMessage(msg.user, msg.message);
+            const allMsgs = await chatService.getAll();
+            socketServer.emit('updatedMessages', allMsgs);
+        } catch (error) {
+            throw new Error(error.message); 
+        }
       })
   });
 }
