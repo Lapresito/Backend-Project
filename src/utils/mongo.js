@@ -1,4 +1,4 @@
-import { connect, Schema, model } from 'mongoose';
+import { connect } from 'mongoose';
 export async function connectMongo() {
   try {
     await connect(

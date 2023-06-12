@@ -6,18 +6,15 @@ const productService = new ProductService();
 
 productsRouter.get("/", async (req, res) => {
     try {
-        let limit = req.query.limit;
-        const products = await productService.getAll();
-        if (!limit) {
-            return res.status(200).json({status: "success",
-            message: "Products list",
-            payload: products})
-        }
-        limit = parseInt(limit)
-        if (isNaN(limit)) {
-            throw new Error('Limit query has to be a valid number')
-        }
-        res.status(200).json(products.slice(0, limit))
+        let {limit = 4, page = 1, query, sort} = req.query
+        if(sort && (sort !== 'asc' && sort !== 'desc')){
+            sort = ''
+        } 
+        const payload = await productService.getAll(page, limit, sort, query);
+        res.status(200).json({
+            status: "success",
+            payload: payload
+        })
     } catch (error) {
         res.status(400).json({
             status: "error",

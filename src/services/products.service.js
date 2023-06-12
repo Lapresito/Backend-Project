@@ -1,10 +1,51 @@
 import { ProductModel } from "../dao/models/products.model.js";
 
 export class ProductService {
-    async getAll() {
+    async getAll(page, limit, sort, query) {
         try {
-            const products = await ProductModel.find({}).lean().exec();
-            return products;
+            const options = {
+                page: page || 1,
+                limit: limit || 4,
+                sort: sort || "asc"
+            };
+            const queryOptions = {};
+            if(query){
+                queryOptions.$text = {$search: query}
+            }
+            if(sort){
+                options.sort = {
+                    price: sort
+                }
+            }
+            console.log(queryOptions);
+            const queryResult = await ProductModel.paginate(queryOptions, options)
+            console.log(queryResult)
+            const {docs, ...rest } = queryResult;
+            let products = docs.map((doc)=>{
+                return {
+                    title: doc.title,
+                    description: doc.description,
+                    price: doc.price,
+                    stock: doc.stock,
+                    category: doc.category,
+                    thumbnail: doc.thumbnail,
+                    id: doc._id.toString()
+                }
+            })
+            let prevPage = rest.prevPage
+            let prevLink = prevPage ? `/products?page=${prevPage}` : null;
+            let nextPage = rest.nextPage
+            let nextLink = nextPage ? `/products?page=${nextPage}` : null;
+            let links = {
+                prevLink: prevLink,
+                nextLink: nextLink
+            }
+            const data = {
+                products: products,
+                pagination: rest,
+                links: links
+            }
+            return data;
         } catch (error) {
             throw new Error(error.message);
         }
