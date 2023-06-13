@@ -113,41 +113,5 @@ cartsRouter.delete("/:cid/product/:pid", async (req, res) => {
     }
 })
 
-cartsRouter.put("/:cid/product/:pid", async (req, res)=>{
-    try {
-        const pid = req.params.pid;
-        const cid = req.params.cid;
-        await cartService.updateCart(cid, pid, req.body);
-        const cart = await cartService.getCartById(cid);
-        res.status(201).json({
-            status: "success",
-            message: `Cart with id ${cid} was uploaded successfuly`, 
-            payload: cart
-        })
-    } catch (error) {
-        res.status(400).json({
-            status: "error",
-            error: error.message
-        })
-    }
-})
-cartsRouter.put("/:cid", async (req, res)=>{
-    try {
-        const cid = req.params.cid;
-        await cartService.updateCart(cid, null, req.body);
-        const cart = await cartService.getCartById(cid);
-        res.status(201).json({
-            status: "success",
-            message: `Cart with id ${cid} was uploaded successfuly`, 
-            payload: cart
-        })
-    } catch (error) {
-        res.status(400).json({
-            status: "error",
-            error: error.message
-        })
-    }
-})
-
 
 export default cartsRouter;

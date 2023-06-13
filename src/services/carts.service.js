@@ -34,7 +34,7 @@ export class CartService{
     }
     async deleteCart(_id){
         try {
-          const deletedCart = await CartModel.updateOne({ _id }, {products: []});
+         const deletedCart = await CartModel.deleteOne({_id});
          return deletedCart;   
         } catch (error) {
             throw new Error(error.message);
@@ -42,6 +42,12 @@ export class CartService{
     }
     async addProductToCart(productId, cartId) {
         try {
+          let products = await productService.getAll();
+          let checkPId = products.find((pId) => pId._id.equals(productId));
+          if (!checkPId) {
+            throw new Error("Invalid id, product not found");
+          }
+
           let carts = await this.getAll();
           let checkCId = carts.find((cId)=> cId._id.equals(cartId));
           if(!checkCId){
@@ -85,33 +91,6 @@ export class CartService{
           }
           await cart.save();
           console.log(`Product ${productId} was deleted successfully from cart ${cartId}`);
-        } catch (error) {
-          throw new Error(error.message);
-        }
-      }
-
-      async updateCart(cartId, productId, cartByUser){
-        try {
-          if(productId === null ){
-            //modifica carrito nuevo
-            let cart = await CartModel.findOne({ _id: cartId });
-            let newCart = cart.products = cartByUser.products
-            await cart.save();
-            console.log(`The products of cart with id:${cartId} was updated succesfuly`)
-            return newCart;
-          }else{
-             //modifica cantidad
-             let cart = await CartModel.findOne({ _id: cartId });
-      
-             let existingProduct = cart.products.find((pId) => pId.idProduct === productId);
-             if (existingProduct) {
-               existingProduct.quantity = cartByUser.quantity
-             } else {
-               throw new Error(`Product with id: ${productId} was not found in the cart with id:${cartId}`);
-             }
-             await cart.save();
-             return cart;
-          }
         } catch (error) {
           throw new Error(error.message);
         }
