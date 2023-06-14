@@ -100,3 +100,6 @@ typePlace.addEventListener('keyup', ({ key }) =>{
             }, '');
     })
     
+function addProductToCart(){
+    
+}

@@ -32,13 +32,14 @@ export class CartService{
         }
     }
     async deleteCart(_id){
-        try {
-         const deletedCart = await CartModel.deleteOne({_id});
-         return deletedCart;   
-        } catch (error) {
-            throw new Error(error.message);
-        }
-    }
+      try {
+        await CartModel.updateOne({ _id }, {products: []});
+        const cart = await this.getCartById(_id)
+        return cart;   
+      } catch (error) {
+          throw new Error(error.message);
+      }
+  }
     async addProductToCart(productId, cartId) {
         try {
           let carts = await this.getAll();

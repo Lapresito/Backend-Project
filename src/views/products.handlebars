@@ -1,11 +1,31 @@
-<div class="products">
-    <h1>Products list</h1>
-    {{#each products}}
-    <article class="articles">
-        <h2>{{this.title}}</h2>
-        <img src={{this.thumbnail}} alt="">
-        <h3>Price: {{this.price}}</h4>
-        <p>Stock: {{this.stock}}</p>
-    </article>
-    {{/each}}
-</div>
+<h1>Welcome to E-commerce</h1>
+<div id="bodyRT">
+    <div id="products">
+            <h2>Products list</h2>
+            <h3>Page: {{pagination.page}}</h3>
+        <div id="dynamicProducts">
+                {{#each products }}
+                <div id="{{this._id}}" style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: solid 3px blue; width: 100%; heigth: 100%">
+                    <h2>{{this.title}}</h2>
+                    <img src={{this.thumbnail}} style="max-width: 100px; max-height: 200px">
+                    <h3>Price: {{this.price}}</h4>
+                    <p>Stock: {{this.stock}}</p>
+                    <button onclick="addProductToCart("{{this._id}}")">Add To Cart🛒</button>
+                </div>
+                {{/each}}
+        </div>
+        <div class="pageController">
+            <a href="/products?page=1">⏮</a>
+            {{#if pagination.hasPrevPage}}
+            <a href="/products?page={{pagination.prevPage}}">⏪{{pagination.prevPage}}🔹</a>
+            {{/if}}
+            <a >{{pagination.page}}</a>
+            {{#if pagination.hasNextPage}}
+            <a href="/products?page={{pagination.nextPage}}">🔹{{pagination.nextPage}}⏩</a>
+            {{/if}}
+            <a href="/products?page=6">⏭</a>
+        </div>
+
+    </div>
+
+    <script src="/js/index.js"></script>

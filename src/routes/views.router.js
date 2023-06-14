@@ -1,20 +1,22 @@
 import express from 'express';
-import { ProductService } from '../services/products.service.js';
+import { ProductModel } from '../dao/models/products.model.js';
 
 const viewsRouter = express.Router();
-const productService = new ProductService()
 
 
-viewsRouter.get('/', async (req, res)=>{
+
+viewsRouter.get('/products', async (req, res)=>{
     try {
-        let products = await productService.getAll();
-        res.render('home',{
-            products: products
+        const { page}  = req.query
+        const query = await ProductModel.paginate({},{limit: 3, page: page || 1});
+        const { docs, ...rest } = query;
+        let products = docs.map((doc)=>{
+            return { title: doc.title, thumbnail: doc.thumbnail, price: doc.price, stock: doc.stock }
         });
+        res.render('products',{ products, pagination: rest });
     } catch (error) {
         throw new Error(error.message)
     }
-
 })
 
 export default viewsRouter;

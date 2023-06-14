@@ -81,7 +81,7 @@ cartsRouter.delete("/:id", async (req, res) => {
     try {
         const id = req.params.id;
         const cart = await cartService.deleteCart(id);
-        res.status(200).json({status:"success", message: `The cart with id: ${id} was deleted succesfully!`
+        res.status(200).json({status:"success", message: `The cart with id: ${id} was deleted succesfully!`, payload: cart
         })
     } catch (error) {
         res.status(400).json({
@@ -98,6 +98,7 @@ cartsRouter.delete("/:cid/product/:pid", async (req, res) => {
         const cid = req.params.cid;
         await cartService.deleteProductFromCart(pid, cid)
         const cart = await cartService.getCartById(cid);
+        console.log(cart)
         res.status(201).json({
             status: "success",
             message: `Product with id:${pid} was deleted successfully from cart with id ${cid}`, 

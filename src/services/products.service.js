@@ -17,9 +17,7 @@ export class ProductService {
                     price: sort
                 }
             }
-            console.log(queryOptions);
             const queryResult = await ProductModel.paginate(queryOptions, options)
-            console.log(queryResult)
             const {docs, ...rest } = queryResult;
             let products = docs.map((doc)=>{
                 return {
