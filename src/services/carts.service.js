@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { CartModel } from "../dao/models/carts.model.js";
 import { ProductService } from "./products.service.js";
 const productService = new ProductService();
@@ -26,7 +25,7 @@ export class CartService{
     }
     async getCartById(_id){
         try {
-            const cart = await CartModel.findOne({ _id });
+            const cart = await CartModel.findOne({ _id }).populate('products.idProduct');
             return cart;
         } catch (error) {
             throw new Error(error.message);
@@ -42,19 +41,14 @@ export class CartService{
     }
     async addProductToCart(productId, cartId) {
         try {
-          let products = await productService.getAll();
-          let checkPId = products.find((pId) => pId._id.equals(productId));
-          if (!checkPId) {
-            throw new Error("Invalid id, product not found");
-          }
-
           let carts = await this.getAll();
           let checkCId = carts.find((cId)=> cId._id.equals(cartId));
           if(!checkCId){
             throw new Error("Invalid id, cart not found");
           }
           let cart = await CartModel.findOne({ _id: cartId });
-          let existingProduct = cart.products.find((pId) => pId.idProduct === productId);
+          console.log(cart)
+          let existingProduct = cart.products.find((pId) => pId.idProduct.equals(productId));
       
           if (existingProduct) {
             existingProduct.quantity += 1;
@@ -79,7 +73,7 @@ export class CartService{
           }
           let cart = await CartModel.findOne({ _id: cartId });
       
-          let existingProduct = cart.products.find((pId) => pId.idProduct === productId);
+          let existingProduct = cart.products.find((pId) => pId.idProduct.equals(productId));
           if (existingProduct) {
             if (existingProduct.quantity === 1) {
               cart.products.splice(cart.products.indexOf(existingProduct), 1);
@@ -96,5 +90,30 @@ export class CartService{
         }
       }
       
-
+      async updateCart(cartId, productId, cartByUser){
+        try {
+          if(productId === null ){
+            //modifica carrito nuevo
+            let cart = await CartModel.findOne({ _id: cartId });
+            let newCart = cart.products = cartByUser.products
+            await cart.save();
+            console.log(`The products of cart with id:${cartId} was updated succesfuly`)
+            return newCart;
+          }else{
+             //modifica cantidad
+             let cart = await CartModel.findOne({ _id: cartId });
+      
+             let existingProduct = cart.products.find((pId) => pId.idProduct.equals(productId));
+             if (existingProduct) {
+               existingProduct.quantity = cartByUser.quantity
+             } else {
+               throw new Error(`Product with id: ${productId} was not found in the cart with id:${cartId}`);
+             }
+             await cart.save();
+             return cart;
+          }
+        } catch (error) {
+          throw new Error(error.message);
+        }
+      }
 }
