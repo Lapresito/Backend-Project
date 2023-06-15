@@ -10,7 +10,7 @@
                     <img src={{this.thumbnail}} style="max-width: 100px; max-height: 200px">
                     <h3>Price: {{this.price}}</h4>
                     <p>Stock: {{this.stock}}</p>
-                    <button onclick="addProductToCart("{{this._id}}")">Add To Cart🛒</button>
+                    <button onclick="addProductToCart('{{this._id}}')">Add To Cart🛒</button>
                 </div>
                 {{/each}}
         </div>
@@ -28,4 +28,4 @@
 
     </div>
 
-    <script src="/js/index.js"></script>
+    <script src="/js/products.cart.js"></script>
