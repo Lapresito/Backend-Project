@@ -1,0 +1,10 @@
+<h1>Hi Admin!</h1>
+<h2>Users List</h2>
+{{#each users}}
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: solid 3px blue; width: 100%; heigth: 100%">
+        <h3>Name: {{this.firstName}}</h3>
+        <h2>Lastname: {{this.lastName}}</h2>
+        <h2>Email: {{this.email}}</h2>
+        <h2>Rol: {{this.rol}}</h2>
+    </div>
+{{/each}}

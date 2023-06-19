@@ -1,4 +1,4 @@
-export function isUser(req, res, next) {
+export  function isUser(req, res, next) {
     if (req.session?.email) {
       return next();
     }
@@ -6,12 +6,16 @@ export function isUser(req, res, next) {
   }
   
 export function isAdmin(req, res, next) {
-    if (req.session?.rol === "admin") {
+    if (req.session.rol === "admin") {
       return next();
     }
     return res.status(403).render('error', { error: 'You have no acces, authorization is required' });
   }
 
-export function userData(req, res, next){
-  
+
+export function goToLogin(req, res, next){
+  if (req.session?.email) {
+    return next();
+  }
+  return res.status(401).render('login', { });
 }
