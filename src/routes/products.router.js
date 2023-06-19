@@ -21,7 +21,7 @@ productsRouter.get("/", async (req, res) => {
             error: error.message
         })
     }
-})
+});
 productsRouter.get("/:id", async (req, res) => {
 
     try {
@@ -35,7 +35,7 @@ productsRouter.get("/:id", async (req, res) => {
             error: error.message
         })
     }
-})
+});
 productsRouter.post("/", async (req, res) => {
     try {
         const product = req.body
@@ -44,7 +44,7 @@ productsRouter.post("/", async (req, res) => {
     } catch (error) {
         res.status(400).json({status: "error", error: error.message})
     }
-})
+});
 productsRouter.delete("/:id", async (req, res)=>{
     try {
         const id = req.params.id;
@@ -57,7 +57,7 @@ productsRouter.delete("/:id", async (req, res)=>{
             error: error.message
         }) 
     }
-})
+});
 productsRouter.put("/:id", async (req, res)=>{
     try {
         const id = req.params.id;
@@ -71,6 +71,6 @@ productsRouter.put("/:id", async (req, res)=>{
             error: error.message
         }) 
     }
-})
+});
 
 export default productsRouter;
