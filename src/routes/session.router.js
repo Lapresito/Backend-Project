@@ -2,6 +2,7 @@ import express from "express";
 import { UserModel } from "../dao/models/users.model.js";
 import { goToLogin, isAdmin, isUser } from "../middlewares/authenticator.js";
 import { getProductData } from "../middlewares/prods.js";
+import passport from "passport";
 
 const sessionRouter = express.Router();
 
@@ -14,67 +15,66 @@ sessionRouter.get('/logout', (req, res)=>{
     });
 });
 
-sessionRouter.get('/profile', goToLogin ,isUser, (req,res)=>{
-    const user = { firstName: req.session.firstName, lastName: req.session.lastName, email: req.session.email, rol: req.session.rol}
+sessionRouter.get('/profile', goToLogin, isUser, (req,res)=>{
+    const user = { firstName: req.session.user.firstName, lastName: req.session.user.lastName, email: req.session.user.email, rol: req.session.user.rol}
     console.log(req.session);
     return res.render('profile', { user });
 });
+
+sessionRouter.get('/github', passport.authenticate('github', { scope: ['user:email'] }));
+
+sessionRouter.get('/githubcallback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
+    req.session.user = req.user;
+    res.redirect('/session/profile');
+  });
 
 sessionRouter.get('/login', (req, res)=>{
     return res.render('login', {});
 });
 
-sessionRouter.post('/login', async (req, res)=>{
+sessionRouter.post('/login', passport.authenticate('login', {failureRedirect: '/session/faillogin'}), async (req, res)=>{
     try {
-        const { email, password } = req.body;
-        if( !email || !password ){
-            return res.status(400).render('error', {error: 'You have to insert your credentials'})
-        };
-        const foundUser = await UserModel.findOne({email: email})
-        if(foundUser && foundUser.password === password){
-            req.session.email = foundUser.email;
-            req.session.rol = foundUser.rol;
-            req.session.firstName = foundUser.firstName;
-            req.session.lastName = foundUser.lastName;
-            return res.redirect('/session/profile');
-        }else{
-            return res.status(401).render('error', { error: 'Wrong email or password'});
-        };
+        if (!req.user) {
+            return res.status(401).render('error', { error: 'Invalid credentials' });
+          }
+          req.session.user = { _id: req.user._id, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName, rol: req.user.rol };
+        
+          return res.status(200).redirect('/session/profile');
     } catch (error) {
         return res.status(500).render('error', { error: error.message});
     }
 })
+
+sessionRouter.get('/faillogin', async (req, res) => {
+    return res.status(400).render('error',{ error: 'Fail to login' });
+  });
+
 sessionRouter.get('/register', (req, res) => {
     return res.render('register', {});
   });
 
-sessionRouter.post('/register', async (req, res) => { 
-    try {
-        const { email, password, firstName, lastName } = req.body;
-    if (!email || !password || !firstName || !lastName) {
-      return res.status(400).render('error', { error: 'Empty fields, please add all the statements' });
+sessionRouter.post('/register', passport.authenticate('register', {failureRedirect: '/session/failregister'}), (req, res) => { 
+    if(!req.user){
+        return res.status(400).render('error', { error: error.message });
     }
-        if( email === "adminCoder@coder.com" &&  password=== "adminCod3r123" && firstName=== firstName && lastName=== lastName){
-            await UserModel.create({ email: email, password: password, firstName: firstName, lastName: lastName, rol: 'admin' })
-            return res.redirect('/session/profile');
-        }else{
-            await UserModel.create({ email: email, password: password, firstName: firstName, lastName: lastName, rol: 'user' });
-            return res.redirect('/session/profile');
-        }
-
-    } catch (error) {
-      return res.status(400).render('error', { error: 'This email already exists, please try with otherone', message: error.message});
-    }
+    req.session.user = {_id: req.user._id, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName, rol: req.user.rol}
+    return res.status(200).redirect('/session/login')
+    
   });
+
+  sessionRouter.get('/failregister', async (req, res) =>{
+    return res.status(400).render('error',{error: 'Fail to register'})
+  })
+
 
   sessionRouter.get('/products',isUser, getProductData, async(req, res)=>{
     try {
-        const user = { firstName: req.session.firstName, lastName: req.session.lastName, email: req.session.email, rol: req.session.rol}
+        const user = { firstName: req.session.user.firstName, lastName: req.session.user.lastName, email: req.session.user.email, rol: req.session.user.rol}
         const { productsData } = res.locals
 
-        res.render('loggedproducts', {productsData: productsData, user: user} );
+        res.render('loggedproducts', {productsData: productsData, user: user});
     } catch (error) {
-        return res.status(500).render('error', { error: error.message})
+        return res.status(500).render('error', {error: error.message})
     }
   })
 
@@ -93,6 +93,6 @@ sessionRouter.post('/register', async (req, res) => {
     } catch (error) {
         return res.status(500).render('error', { error: error.message})
     }
-  })
+  });
 
   export default sessionRouter;

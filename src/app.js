@@ -8,9 +8,12 @@ import realtimeRouter from './routes/realtime.router.js';
 import sessionRouter from './routes/session.router.js'
 import path from 'path';
 import handlebars from 'express-handlebars';
+import passport from 'passport';
 import { __dirname } from "./utils/dirname.js";
 import { connectMongo } from './utils/mongo.js';
 import { connectSocket } from './utils/sockets.js';
+import { iniPassport } from './config/passport.config.js';
+
 
 
 
@@ -19,6 +22,7 @@ const PORT = 8080;
 
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({
     extended: true
 }));
@@ -34,7 +38,12 @@ app.use(session({
       saveUninitialized: true,
     })
 );
-app.use(express.static(path.join(__dirname, "public")));
+
+
+iniPassport();
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);

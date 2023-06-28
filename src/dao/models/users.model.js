@@ -1,5 +1,4 @@
 import { Schema, model } from 'mongoose';
-import monsoosePaginate from 'mongoose-paginate-v2';
 
 const schema = new Schema({
   firstName: {
@@ -16,12 +15,11 @@ const schema = new Schema({
     max: 100,
     unique: true,
   },password: {
-    type: String,
-    required: true,
+    type: [String, null],
     max: 100,
   },rol: {
     type: String,
     required: true,
   },
-});
+}, {versionKey: false});
 export const UserModel = model('users', schema);

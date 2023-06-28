@@ -26,4 +26,11 @@ viewsRouter.get('/cart/:cid', getCartData, async (req, res)=>{
     }
 })
 
+viewsRouter.get('/', (req, res)=>{
+    try {
+        return res.status(200).render('home', {})
+    } catch (error) {
+        return res.status(500).render('error',{error: error.message})
+    }
+})
 export default viewsRouter;

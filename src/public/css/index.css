@@ -37,4 +37,24 @@ button{
     width: 80px;
     height: 30px;
 }
- 
+ #admin-block{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+ }
+
+ a{
+    color: rgb(165, 11, 11);
+ }
+ a:hover{
+    background-color: rgba(137, 43, 226, 0.582);
+    border-radius: 5%;
+ }
+ h1{
+    color: brown;
+    text-shadow: black 0.1em 0.1em 0.2em
+ }
+
+ form{
+    width: 80%;
+ }
