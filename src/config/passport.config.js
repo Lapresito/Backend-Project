@@ -4,6 +4,9 @@ import GitHubStrategy from 'passport-github2';
 import fetch from 'node-fetch'
 import { createHash, isValidPassword } from '../utils/bcrypt.js';
 import { UserModel } from '../dao/models/users.model.js';
+import { CartService } from '../services/carts.service.js';
+
+const cartService = new CartService
 const LocalStrategy = local.Strategy;
 
 export function iniPassport() {
@@ -42,12 +45,15 @@ export function iniPassport() {
             return done(null, false);
           }
 
+          let userCart = await cartService.addCart()
+          console.log(userCart)
           const newUser = {
             email,
             firstName,
             lastName,
             rol: 'user',
             password: createHash(password),
+            cart: userCart._id
           };
           let userCreated = await UserModel.create(newUser);
           console.log(userCreated);
@@ -66,9 +72,9 @@ export function iniPassport() {
     'github',
     new GitHubStrategy(
       {
-        clientID: '',
-        clientSecret: '',
-        callbackURL: '',
+        clientID: 'Iv1.4b307e17ae27b0f1',
+        clientSecret: '3021c91a9db5c150bef5c568eb329ed5bd1b5675',
+        callbackURL: 'http://localhost:8080/session/githubcallback',
       },
       async (accesToken, _, profile, done) => {
         try {
@@ -89,12 +95,14 @@ export function iniPassport() {
 
           let user = await UserModel.findOne({ email: profile.email });
           if (!user) {
+            let userCart = await cartService.addCart()
             const newUser = {
               email: profile.email,
               firstName: profile._json.name || profile._json.login || 'Avatar',
               lastName: profile._json.name ||'Avatar',
               password: null,
-              rol: 'user'
+              rol: 'user',
+              cart: userCart._id
             };
             let userCreated = await UserModel.create(newUser);
             console.log('User registration succesful');

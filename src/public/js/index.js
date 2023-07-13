@@ -64,22 +64,22 @@ function deleteProduct(_id){
 //Chat 
 
 
-let userEmail = '';
-async function getEmail(){
-    const { value: email } = await Swal.fire({
-      title: 'Input email address to chat',
-      input: 'email',
-      inputLabel: 'Your email address',
-      inputPlaceholder: 'Enter your email address'
-    });
+let userEmail = document.querySelector('.currentAdmin').id
+// async function getEmail(){
+//     const { value: email } = await Swal.fire({
+//       title: 'Input email address to chat',
+//       input: 'email',
+//       inputLabel: 'Your email address',
+//       inputPlaceholder: 'Enter your email address'
+//     });
   
-    if (email) {
-      Swal.fire(`Entered email: ${email}`);
-    }
+//     if (email) {
+//       Swal.fire(`Entered email: ${email}`);
+//     }
   
-    userEmail = email;
-  }
-getEmail();
+//     userEmail = email;
+//   }
+// getEmail();
 
 const typePlace = document.getElementById('type-place');
 typePlace.addEventListener('keyup', ({ key }) =>{
@@ -100,6 +100,3 @@ typePlace.addEventListener('keyup', ({ key }) =>{
             }, '');
     })
     
-function addProductToCart(){
-    
-}

@@ -62,7 +62,11 @@ export class ProductService {
     async addProduct(product) {
         try {
             await this.productValidation(product.title, product.description, product.price, product.thumbnail, product.code, product.stock, product.category);
-            let products = await this.getAll()
+            const query = await ProductModel.paginate({}, {limit: 40});
+            const { docs, ...rest } = query;
+            let products = docs.map((doc) => {
+              return { _id: doc._id, title: doc.title, thumbnail: doc.thumbnail, price: doc.price, stock: doc.stock };
+            });
             let checkCode = products.find((pCode) => pCode.code === product.code);
             if (checkCode) {
                 throw new Error('Already exists a product with that code');

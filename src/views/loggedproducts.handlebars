@@ -1,5 +1,8 @@
 <h1>Welcome {{user.firstName}}</h1>
+<div>
 <h4>Have a look on our products, Dear {{user.lastName}}</h2>
+<a id="{{user.cart}}" href="/cart/{{user.cart}}" class="userCart" >🛒</a>
+</div>
 <p>Remember, our communication via is <span style="color: rgb(226, 162, 43);">{{user.email}}</span></p>
 <div id="bodyRT">
     <div id="products">
@@ -33,4 +36,4 @@
         <a href="/session/profile">Back to profile</a>
     </div>
 
-    <script src="/js/products.cart.js"></script>
+    <script src="/js/loggedproducts.js"></script>

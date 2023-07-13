@@ -16,7 +16,7 @@ sessionRouter.get('/logout', (req, res)=>{
 });
 
 sessionRouter.get('/profile', goToLogin, isUser, (req,res)=>{
-    const user = { firstName: req.session.user.firstName, lastName: req.session.user.lastName, email: req.session.user.email, rol: req.session.user.rol}
+    const user = { firstName: req.session.user.firstName, lastName: req.session.user.lastName, email: req.session.user.email, rol: req.session.user.rol, cart: req.session.user.cart}
     console.log(req.session);
     return res.render('profile', { user });
 });
@@ -37,7 +37,7 @@ sessionRouter.post('/login', passport.authenticate('login', {failureRedirect: '/
         if (!req.user) {
             return res.status(401).render('error', { error: 'Invalid credentials' });
           }
-          req.session.user = { _id: req.user._id, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName, rol: req.user.rol };
+          req.session.user = { _id: req.user._id, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName, rol: req.user.rol, cart: req.user.cart};
         
           return res.status(200).redirect('/session/profile');
     } catch (error) {
@@ -57,7 +57,7 @@ sessionRouter.post('/register', passport.authenticate('register', {failureRedire
     if(!req.user){
         return res.status(400).render('error', { error: error.message });
     }
-    req.session.user = {_id: req.user._id, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName, rol: req.user.rol}
+    req.session.user = {_id: req.user._id, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName, rol: req.user.rol, cart: req.user.cart}
     return res.status(200).redirect('/session/login')
     
   });
@@ -67,9 +67,9 @@ sessionRouter.post('/register', passport.authenticate('register', {failureRedire
   })
 
 
-  sessionRouter.get('/products',isUser, getProductData, async(req, res)=>{
+  sessionRouter.get('/products', isUser, getProductData, async(req, res)=>{
     try {
-        const user = { firstName: req.session.user.firstName, lastName: req.session.user.lastName, email: req.session.user.email, rol: req.session.user.rol}
+        const user = { firstName: req.session.user.firstName, lastName: req.session.user.lastName, email: req.session.user.email, rol: req.session.user.rol, cart: req.session.user.cart}
         const { productsData } = res.locals
 
         res.render('loggedproducts', {productsData: productsData, user: user});
@@ -86,7 +86,8 @@ sessionRouter.post('/register', passport.authenticate('register', {failureRedire
               firstName: user.firstName,
               lastName: user.lastName,
               email: user.email,
-              rol: user.rol
+              rol: user.rol,
+              cart: user.cart
             }
           })
         res.render('adminview', {users: usersPlain} );
@@ -94,5 +95,10 @@ sessionRouter.post('/register', passport.authenticate('register', {failureRedire
         return res.status(500).render('error', { error: error.message})
     }
   });
+
+  sessionRouter.get('/current', isUser, (req, res)=>{
+    console.log(req.session);
+    return res.status(200).json({ user: req.session.user });
+  })
 
   export default sessionRouter;

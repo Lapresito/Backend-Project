@@ -18,6 +18,22 @@ export async function getProductData(req, res, next) {
 }
 
 
+//temporally// toDo
+export async function getAllProductData(req, res, next) {
+  try {
+    const query = await ProductModel.paginate({}, {limit: 40});
+    const { docs, ...rest } = query;
+    let products = docs.map((doc) => {
+      return { _id: doc._id, title: doc.title, thumbnail: doc.thumbnail, price: doc.price, stock: doc.stock };
+    });
+    res.locals.productsData = { products, pagination: rest };
+    next();
+  } catch (error) {
+    next(error);
+  }
+}
+// end
+
 export async function getCartData(req, res, next) {
   try {
     const cid = req.params.cid;

@@ -1,9 +1,10 @@
+<h4 id="{{user.email}}" class="currentAdmin">Current admin: {{user.email}}</h4>
 <div id="bodyRT">
     <div id="products">
         <h1>Products list</h1>
-        <div id="dynamicProducts" >
-                {{#each products}}
-                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: solid 3px blue; width: 100%">
+        <div id="productManager">
+                {{#each products.products }}
+                <div id="{{this._id}}" style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: solid 3px blue; width: 100%; heigth: 100%">
                     <h2>{{this.title}}</h2>
                     <img src={{this.thumbnail}} style="max-width: 100px; max-height: 200px">
                     <h3>Price: {{this.price}}</h4>

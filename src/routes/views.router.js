@@ -1,9 +1,7 @@
 import express from 'express';
-import { CartService } from '../services/carts.service.js';
 import { getProductData, getCartData } from '../middlewares/prods.js';
 
 
-const cartService = new CartService;
 const viewsRouter = express.Router();
 
 

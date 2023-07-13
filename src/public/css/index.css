@@ -32,6 +32,12 @@ label[for=send]{
     justify-content: center;
     align-items: center;
 }
+#productManager{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 button{
     background-color: rgba(245, 16, 16, 0.705);
     width: 80px;
