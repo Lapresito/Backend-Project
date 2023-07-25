@@ -1,9 +1,8 @@
 import { connect } from 'mongoose';
+import config from '../config/config.js';
 export async function connectMongo() {
   try {
-    await connect(
-      "mongodb+srv://joacolaprovitera:nDKDmuv3K3y9DCwX@backend-coder.uwjcypw.mongodb.net/ecommerce?retryWrites=true&w=majority"
-    );
+    await connect(config.mongoUrl);
     console.log("plug to mongo!");
   } catch (error) {
     console.log(error.message);

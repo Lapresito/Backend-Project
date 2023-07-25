@@ -9,16 +9,15 @@ import sessionRouter from './routes/session.router.js'
 import path from 'path';
 import handlebars from 'express-handlebars';
 import passport from 'passport';
+import config from './config/config.js';
 import { __dirname } from "./utils/dirname.js";
 import { connectMongo } from './utils/mongo.js';
 import { connectSocket } from './utils/sockets.js';
 import { iniPassport } from './config/passport.config.js';
 
 
-
-
 const app = express();
-const PORT = 8080;
+const PORT = config.port
 
 
 app.use(express.json());
@@ -32,7 +31,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
 app.use(session({
-      store: MongoStore.create({ mongoUrl: "mongodb+srv://joacolaprovitera:nDKDmuv3K3y9DCwX@backend-coder.uwjcypw.mongodb.net/ecommerce?retryWrites=true&w=majority", ttl: 86400 }),
+      store: MongoStore.create({ mongoUrl: config.mongoUrl, ttl: 86400 }),
       secret: 'secret',
       resave: true,
       saveUninitialized: true,

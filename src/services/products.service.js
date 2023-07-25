@@ -131,6 +131,10 @@ export class ProductService {
             throw new Error(error.message);
         }
     }
+    async getProductData(page){
+        const query = await ProductModel.paginate({}, { page: page || 1, limit: 3 });
+        return query
+    }
 
 }
 
