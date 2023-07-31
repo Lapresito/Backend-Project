@@ -3,7 +3,7 @@ import { ProductService } from '../services/products.service.js';
 const productService = new ProductService();
 import { ChatService } from '../services/chat.service.js';
 const chatService = new ChatService();
-import { ProductModel } from "../dao/models/products.model.js";
+import { ProductModel } from "../dao/mongo/models/products.model.js";
 
 export function connectSocket(httpServer){
   const socketServer = new Server(httpServer);

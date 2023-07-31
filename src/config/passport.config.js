@@ -4,7 +4,7 @@ import GitHubStrategy from 'passport-github2';
 import fetch from 'node-fetch'
 import config from '../config/config.js';
 import { createHash, isValidPassword } from '../utils/bcrypt.js';
-import { UserModel } from '../dao/models/users.model.js';
+import { UserModel } from '../dao/mongo/models/users.model.js';
 import { CartService } from '../services/carts.service.js';
 
 const cartService = new CartService

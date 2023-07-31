@@ -1,5 +1,7 @@
-import { UserModel } from "../dao/models/users.model.js";
+import { UserModel } from "../dao/mongo/models/users.model.js";
 import ProductService from "../services/products.service.js";
+import { UserService } from "../services/users.service.js";
+const userService = new UserService;
 const productService = new ProductService;
 class SessionController{
     logout(req, res){
@@ -67,7 +69,7 @@ class SessionController{
     }
     async admin(req, res){
         try {
-            const users = await UserModel.find({})
+            const users = await userService.getAll()
             const usersPlain = users.map(user => {
                 return {
                   firstName: user.firstName,
