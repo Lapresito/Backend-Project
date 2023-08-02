@@ -22,10 +22,12 @@ switch (config.persistence) {
     UserMethods = userModel;
 
     break;
-  case 'MEMORY':
-    console.log('Persistence with Memory');
-    const { ContactsMemory } = await import('./memory/contacts.memory.js');
-    Contacts = ContactsMemory;
+  case 'FS':
+    console.log('Persistence with FileSystem');
+    const { cartManager } = await import('../dao/fs/classes/CartsManager.js');
+    CartMethods = cartManager;
+    const { productManager } = await import('../dao/fs/classes/ProductManager.js');
+    ProductMethods = productManager;
 
     break;
   default:

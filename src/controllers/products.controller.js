@@ -1,4 +1,5 @@
 import { ProductService } from "../services/products.service.js";
+import { ProductDTO } from '../dao/DTO/product.dto.js'
 const productService = new ProductService
 
 
@@ -39,7 +40,8 @@ class ProductController{
     async addProduct(req, res){
         try {
             const product = req.body
-            await productService.addProduct(product)
+            const productToAdd = new ProductDTO(product)
+            await productService.addProduct(productToAdd)
             res.status(201).json({status:"success",message: 'Added successfuly', payload: product })
         } catch (error) {
             res.status(400).json({status: "error", error: error.message})

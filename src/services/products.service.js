@@ -36,7 +36,6 @@ export class ProductService {
         }
     }
 
-    // toDo Poner en DTO
     async productValidation(title, description, price, thumbnail, code, stock, category) {
         try {
             if (!code || !title || !description || !price || !thumbnail || !stock || !category) {

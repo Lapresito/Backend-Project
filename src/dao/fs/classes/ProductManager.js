@@ -95,4 +95,4 @@ class ProductManager {
         }
     }
 }
-export default ProductManager;
+export const productManager = new ProductManager;

@@ -1,4 +1,4 @@
-import { UserModel } from "../dao/mongo/models/users.model.js";
+import { UserDTO} from "../dao/DTO/users.dto.js";
 import ProductService from "../services/products.service.js";
 import { UserService } from "../services/users.service.js";
 const userService = new UserService;
@@ -85,7 +85,9 @@ class SessionController{
         }
     }
     currentSession(req, res){
-        return res.status(200).json({ user: req.session.user });
+        const user = req.session.user 
+        const userToShow = new UserDTO(user)
+        return res.status(200).json({ user: userToShow });
     }
 }
 

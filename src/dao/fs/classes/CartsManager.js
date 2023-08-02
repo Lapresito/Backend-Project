@@ -139,4 +139,4 @@ class CartsManager {
           }
     }
 }
-export default CartsManager;
+export const cartManager = new CartsManager;
