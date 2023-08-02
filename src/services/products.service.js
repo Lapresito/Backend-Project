@@ -1,11 +1,10 @@
-import { ProductModel } from "../dao/mongo/models/products.model.js";
-import { productModel } from "../dao/mongo/classes/products.dao.js";
+import { ProductMethods } from "../dao/factory.js";
 
 export class ProductService {
     async getAll(page, limit, sort, query) {
         try {
            
-            const queryResult = await productModel.getAll(page, limit, sort, query)
+            const queryResult = await ProductMethods.getAll(page, limit, sort, query)
             const {docs, ...rest } = queryResult;
             let products = docs.map((doc)=>{
                 return {
@@ -37,7 +36,7 @@ export class ProductService {
         }
     }
 
-    // Poner en DTO
+    // toDo Poner en DTO
     async productValidation(title, description, price, thumbnail, code, stock, category) {
         try {
             if (!code || !title || !description || !price || !thumbnail || !stock || !category) {
@@ -54,7 +53,7 @@ export class ProductService {
             await this.productValidation(product.title, product.description, product.price, product.thumbnail, product.code, product.stock, product.category);
             let customA = {}
             let customB ={limit: 40}
-            const query = await productModel.paginate(customA,customB);
+            const query = await ProductMethods.paginate(customA,customB);
             const { docs, ...rest } = query;
             let products = docs.map((doc) => {
               return { _id: doc._id, title: doc.title, thumbnail: doc.thumbnail, price: doc.price, stock: doc.stock };
@@ -63,7 +62,7 @@ export class ProductService {
             if (checkCode) {
                 throw new Error('Already exists a product with that code');
             }
-            const newProduct = await productModel.create({
+            const newProduct = await ProductMethods.create({
                 title: product.title,
                 description: product.description,
                 price: product.price,
@@ -83,7 +82,7 @@ export class ProductService {
     }
     async getProductById(_id) {
         try {
-            const product = await productModel.findOne(_id );
+            const product = await ProductMethods.findOne(_id );
             return product;
         } catch (error) {
             throw new Error(error.message);
@@ -94,7 +93,7 @@ export class ProductService {
         try {
             if (!_id) throw new Error('Invalid _id');
             this.productValidation(product.title, product.description, product.price, product.thumbnail, product.code, product.stock, product.category);
-            const updatedProduct = await productModel.updateOne(_id, product);
+            const updatedProduct = await ProductMethods.updateOne(_id, product);
             console.log(`The product with id: ${_id} was updated succesfully!`);
             return updatedProduct;
         } catch (error) {
@@ -103,7 +102,7 @@ export class ProductService {
     }
     async deleteProduct(_id) {
         try {
-            const deletedProduct = await productModel.deleteProduct(_id);
+            const deletedProduct = await ProductMethods.deleteProduct(_id);
             console.log(`The product with id: ${_id} was deleted succesfully!`);
             return deletedProduct;
         } catch (error) {
@@ -113,9 +112,20 @@ export class ProductService {
     async getProductData(page){
         let customA = {}
         let customB = { page: page || 1, limit: 3 }
-        const query = await productModel.paginate(customA, customB);
+        const query = await ProductMethods.paginate(customA, customB);
         return query
     }
+
+    async getArrProductsData(arr) {
+        const productsData = [];
+      
+        for (const id of arr) {
+          const product = await this.getProductById(id);
+          productsData.push(product);
+        }
+      
+        return productsData;
+      }
 
 }
 

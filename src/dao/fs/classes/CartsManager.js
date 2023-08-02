@@ -8,7 +8,7 @@ class CartsManager {
     constructor(path) {
         this.path = path;
     }
-    async readDataFile() {
+    async find() {
         try {
             if (fs.existsSync(this.path)) {
                 const cartsString = await fs.promises.readFile(this.path, "utf-8");
@@ -26,7 +26,7 @@ class CartsManager {
 
     }
     // verificar
-    async addCart() {
+    async create() {
         try {
             let carts = await this.readDataFile();
             let id = carts.length > 0 ? carts[carts.length - 1].id + 1 : 1;
@@ -43,7 +43,7 @@ class CartsManager {
             throw new Error(error.message);
         }
     }
-    async getCartById(id) {
+    async findOne(id) {
         try {
             let carts = await this.readDataFile()
             let checkId = carts.find((cId) => cId.id === id);
@@ -56,7 +56,9 @@ class CartsManager {
         }
     }
 
-    async addProductToCart(productId, cartId) {
+
+    //toDO merge methods deleteCart, deleteProductFromCart to updateOne
+    async updateOne(productId, cartId) {
         try {
           let carts = await this.readDataFile();
           let productsFile = await productManager.readDataFile();
@@ -89,7 +91,6 @@ class CartsManager {
         }
       }
     
-      //no implementado aun
     async deleteCart(id) {
         try {
             let carts = await this.readDataFile();
@@ -112,13 +113,10 @@ class CartsManager {
             let carts = await this.readDataFile();
             let productsFile = await productManager.readDataFile();
         
-            // verificar si el producto existe
             let checkPId = productsFile.find((pId) => pId.id === productId);
             if (!checkPId) {
               throw new Error("Invalid id, product not found");
             }
-        
-            // quitar o actualizar producto en el carrito
             let findedCart = carts.find((c) => c.id === cartId);
             if (findedCart) {
               let findedProduct = findedCart.products.find((p) => p.id === productId);

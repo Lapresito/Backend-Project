@@ -1,9 +1,9 @@
-import { chatModel } from '../dao/mongo/classes/chat.dao.js';
+import { ChatMethods } from '../dao/factory.js';
 
 export class ChatService{
     async getAll(){
         try {
-            const messages = await chatModel.findLeaned();
+            const messages = await ChatMethods.findLeaned();
             return messages;
         } catch (error) {
             throw new Error(error.message);
@@ -17,7 +17,7 @@ export class ChatService{
                 checkUser.message.concat(msg);
             }
             const newMessage = {user: user, message: msg}
-            const newMsg = await chatModel.create(newMessage);
+            const newMsg = await ChatMethods.create(newMessage);
             console.log(`New message from ${user}`);
             return newMsg;
         } catch (error) {

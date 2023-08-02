@@ -5,7 +5,7 @@ class ProductManager {
     constructor(path) {
         this.path = path;
     }
-    async readDataFile() {
+    async getAll() {
         try {
             if (fs.existsSync(this.path)) {
                 const productsString = await fs.promises.readFile(this.path, "utf-8");
@@ -22,7 +22,7 @@ class ProductManager {
         }
 
     }
-    async addProduct(product) {
+    async create(product) {
         try {
             let products = await this.readDataFile()
             let checkCode = products.some((pCode) => pCode.code === product.code);
@@ -41,7 +41,7 @@ class ProductManager {
             throw new Error(error.message)
         }
     }
-    async getProductsById(id) {
+    async findOne(id) {
         try {
             let products = await this.readDataFile()
             let checkId = products.find((pId) => pId.id === id);
@@ -53,7 +53,7 @@ class ProductManager {
             throw new Error(error.message)
         }
     }
-    async updateProducts(id, product) {
+    async updateOne(id, product) {
         try {
             let products = await this.readDataFile()
             if (!product.code || !product.title || !product.description || !product.price || !product.thumbnail || !product.stock || !product.category) {

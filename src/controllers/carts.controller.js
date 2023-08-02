@@ -144,6 +144,17 @@ class CartController {
             })
         }
     }
+    async purchase(req, res){
+        try {
+            const cid = req.params.cid
+            await cartService.purchase(cid)
+            //const ticket = await TicketService.getTkById()
+            //toDo pasar el TK a la vista.
+            return res.status(200).render('purchased', {})
+        } catch (error) {
+            return res.status(500).render('error',{error: error.message})
+        }
+    }
 
 }
 export const cartController = new CartController();
