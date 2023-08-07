@@ -13,7 +13,7 @@ class SessionController{
         });
     }
     goToProfile(req, res){
-        const user = { firstName: req.session.user.firstName, lastName: req.session.user.lastName, email: req.session.user.email, rol: req.session.user.rol, cart: req.session.user.cart}
+        const user = { firstName: req.session.user.firstName, lastName: req.session.user.lastName, email: req.session.user.email, rol: req.session.user.rol, cart: req.session.user.cart, purchases: req.user.purchases}
         return res.render('profile', { user });
     }
     goToLogin(req, res){
@@ -24,7 +24,7 @@ class SessionController{
             if (!req.user) {
                 return res.status(401).render('error', { error: 'Invalid credentials' });
               }
-              req.session.user = { _id: req.user._id, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName, rol: req.user.rol, cart: req.user.cart};
+              req.session.user = { _id: req.user._id, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName, rol: req.user.rol, cart: req.user.cart, purchases: req.user.purchases};
             
               return res.status(200).redirect('/session/profile');
         } catch (error) {
@@ -41,7 +41,7 @@ class SessionController{
         if(!req.user){
             return res.status(400).render('error', { error: error.message });
         }
-        req.session.user = {_id: req.user._id, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName, rol: req.user.rol, cart: req.user.cart}
+        req.session.user = {_id: req.user._id, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName, rol: req.user.rol, cart: req.user.cart, purchases: req.user.purchases}
         return res.status(200).redirect('/session/login')
     }
     goToFailRegister(req, res){
@@ -50,7 +50,7 @@ class SessionController{
     }
     async getLogedProducts(req, res){
         try {
-            const user = { firstName: req.session.user.firstName, lastName: req.session.user.lastName, email: req.session.user.email, rol: req.session.user.rol, cart: req.session.user.cart}
+            const user = { firstName: req.session.user.firstName, lastName: req.session.user.lastName, email: req.session.user.email, rol: req.session.user.rol, cart: req.session.user.cart, purchases: req.user.purchases}
             const { page } = req.query;
             const query = await productService.getProductData(page);
             const { docs, ...rest } = query;

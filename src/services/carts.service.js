@@ -138,7 +138,6 @@ export class CartService {
           priceAmount += multipliedPrices[i];
         }
         let amount = priceAmount;
-        
         let tkData = {
           purchaser: userPurchasing.email,
           amount: amount,
@@ -164,6 +163,7 @@ export class CartService {
             "stock": prod.stock - prodQuan,
             "category": prod.category
           }
+
           
           await productService.updateProduct(productIds[i],updatedProd);
           //clearing cart

@@ -24,6 +24,7 @@ const schema = new Schema({
   cart: {
     type: String,
     required: false
-  }
+  },
+  purchases:[]
 }, {versionKey: false});
 export const UserModel = model('users', schema);

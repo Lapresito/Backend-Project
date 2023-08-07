@@ -8,7 +8,8 @@ export class UserDTO{
         this.lastName = user.lastName,
         this.email = user.email,
         this.rol = user.rol,
-        this.cart = user.cart
+        this.cart = user.cart,
+        this.purchases = user.purchases
     }
 }
 

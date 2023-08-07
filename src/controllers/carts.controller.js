@@ -1,11 +1,13 @@
 import { CartService } from "../services/carts.service.js";
-const cartService = new CartService
+import { UserService } from "../services/users.service.js";
+const cartService = new CartService;
+const userService = new UserService;
 
 
 class CartController {
     async getAll(req, res) {
         try {
-            let carts = await cartService.getAll()
+            let carts = await cartService.getAll();
             res.status(200).json({
                 status: "success",
                 message: 'Carts list',
@@ -21,7 +23,7 @@ class CartController {
 
     async newCart(req, res) {
         try {
-            let newCart = await cartService.addCart()
+            let newCart = await cartService.addCart();
             res.status(201).json({
                 status: "success",
                 message: 'Cart created successfuly',
@@ -55,7 +57,7 @@ class CartController {
         try {
             const pid = req.params.pid;
             const cid = req.params.cid;
-            await cartService.addProductToCart(pid, cid)
+            await cartService.addProductToCart(pid, cid);
             const cart = await cartService.getCartById(cid);
             res.status(201).json({
                 status: "success",
@@ -92,7 +94,7 @@ class CartController {
         try {
             const pid = req.params.pid;
             const cid = req.params.cid;
-            await cartService.deleteProductFromCart(pid, cid)
+            await cartService.deleteProductFromCart(pid, cid);
             const cart = await cartService.getCartById(cid);
             console.log(cart)
             res.status(201).json({
@@ -148,10 +150,10 @@ class CartController {
         try {
             const cid = req.params.cid
             const user = req.session.user 
-            await cartService.purchase(cid, user)
-            //const ticket = await TicketService.getTkById()
-            //toDo pasar el TK a la vista.
-            return res.status(200).render('purchased', {})
+            await cartService.purchase(cid, user);
+            let tksData = await userService.getUserTks(user.email);
+            let tkData = await tksData[tksData.length - 1];
+            return res.status(200).render('purchased', {tkData})
         } catch (error) {
             return res.status(500).render('error',{error: error.message})
         }

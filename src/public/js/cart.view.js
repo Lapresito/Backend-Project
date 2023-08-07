@@ -15,3 +15,11 @@ fetch(url)
     console.error('Error:', error);
 
   });
+
+
+
+function purchase(){
+// toDo generar validacion por stock
+
+}
+

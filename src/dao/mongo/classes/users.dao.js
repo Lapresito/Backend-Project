@@ -7,6 +7,11 @@ class UserClass{
         const users = await UserModel.find({})
         return users
     }
+
+    async findOne(email){
+        const user = await UserModel.findOne({ email: email});
+        return user;
+    }
 }
 
 
