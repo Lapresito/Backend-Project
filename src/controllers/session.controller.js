@@ -14,7 +14,6 @@ class SessionController{
     }
     goToProfile(req, res){
         const user = { firstName: req.session.user.firstName, lastName: req.session.user.lastName, email: req.session.user.email, rol: req.session.user.rol, cart: req.session.user.cart}
-        console.log(req.session);
         return res.render('profile', { user });
     }
     goToLogin(req, res){
@@ -60,7 +59,6 @@ class SessionController{
             });
             let pagination = rest
             let productsData = {products, pagination}
-            console.log(productsData)
     
             res.render('loggedproducts', {productsData: productsData, user: user});
         } catch (error) {

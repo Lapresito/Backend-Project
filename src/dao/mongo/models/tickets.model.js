@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 
 const schema = new Schema({
-    code: {
+      code: {
       type: String,
       required: true,
     },purchase_datetime: {
@@ -10,8 +10,7 @@ const schema = new Schema({
       max: 100,
     },amount: {
       type: Number,
-      required: true,
-      max: 100,
+      required: true
     },purchaser: {
       type: String,
       max: 100,
