@@ -1,12 +1,18 @@
 import { ProductMethods } from "../dao/factory.js";
+import Errors from "../errors/enums.js";
+import CustomError from "../errors/custom-error.js";
+import { generateProductErrorInfo } from "../errors/product-error.js";
 
 export class ProductService {
     async getAll(page, limit, sort, query) {
         try {
-           
+
             const queryResult = await ProductMethods.getAll(page, limit, sort, query)
-            const {docs, ...rest } = queryResult;
-            let products = docs.map((doc)=>{
+            const {
+                docs,
+                ...rest
+            } = queryResult;
+            let products = docs.map((doc) => {
                 return {
                     title: doc.title,
                     description: doc.description,
@@ -38,8 +44,22 @@ export class ProductService {
 
     async productValidation(title, description, price, thumbnail, code, stock, category) {
         try {
+            let product = {
+                title: title,
+                description: description,
+                price: price,
+                thumbnail: thumbnail,
+                code: code,
+                stock: stock,
+                category: category
+            }
             if (!code || !title || !description || !price || !thumbnail || !stock || !category) {
-                throw new Error('Empty fields, please add all the statements');
+                CustomError.createError({
+                    name: "Empty fields",
+                    cause: generateProductErrorInfo(product),
+                    message: "Empty fields, please check it",
+                    code: Errors.EMPTY_FIELDS,
+                });
             }
         } catch (error) {
             console.log(error)
@@ -51,11 +71,22 @@ export class ProductService {
         try {
             await this.productValidation(product.title, product.description, product.price, product.thumbnail, product.code, product.stock, product.category);
             let customA = {}
-            let customB ={limit: 40}
-            const query = await ProductMethods.paginate(customA,customB);
-            const { docs, ...rest } = query;
+            let customB = {
+                limit: 40
+            }
+            const query = await ProductMethods.paginate(customA, customB);
+            const {
+                docs,
+                ...rest
+            } = query;
             let products = docs.map((doc) => {
-              return { _id: doc._id, title: doc.title, thumbnail: doc.thumbnail, price: doc.price, stock: doc.stock };
+                return {
+                    _id: doc._id,
+                    title: doc.title,
+                    thumbnail: doc.thumbnail,
+                    price: doc.price,
+                    stock: doc.stock
+                };
             });
             let checkCode = products.find((pCode) => pCode.code === product.code);
             if (checkCode) {
@@ -70,7 +101,7 @@ export class ProductService {
                 stock: product.stock,
                 status: true,
                 category: product.category,
-                
+
             });
             console.log(`Product ${product.title} added succesfully`);
             return newProduct;
@@ -81,16 +112,28 @@ export class ProductService {
     }
     async getProductById(_id) {
         try {
-            const product = await ProductMethods.findOne(_id );
+            const product = await ProductMethods.findOne(_id);
             return product;
         } catch (error) {
-            throw new Error(error.message);
+            CustomError.createError({
+                name: "That product doesnt exist",
+                cause: "The product you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
+                message: "The product you have looking for doesnt exist.",
+                code: Errors.NO_PRODUCT,
+            })
         }
 
     }
     async updateProduct(_id, product) {
         try {
-            if (!_id) throw new Error('Invalid _id');
+            if (!_id) {
+                CustomError.createError({
+                    name: "That product doesnt exist",
+                    cause: "The product you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
+                    message: "The product you have looking for doesnt exist.",
+                    code: Errors.NO_PRODUCT,
+                });
+            }
             this.productValidation(product.title, product.description, product.price, product.thumbnail, product.code, product.stock, product.category);
             const updatedProduct = await ProductMethods.updateOne(_id, product);
             console.log(`The product with id: ${_id} was updated succesfully!`);
@@ -105,26 +148,34 @@ export class ProductService {
             console.log(`The product with id: ${_id} was deleted succesfully!`);
             return deletedProduct;
         } catch (error) {
-            throw new Error(error.message);
+            CustomError.createError({
+                name: "That product doesnt exist",
+                cause: "The product you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
+                message: "The product you have looking for doesnt exist.",
+                code: Errors.NO_PRODUCT,
+            });
         }
     }
-    async getProductData(page){
+    async getProductData(page) {
         let customA = {}
-        let customB = { page: page || 1, limit: 3 }
+        let customB = {
+            page: page || 1,
+            limit: 3
+        }
         const query = await ProductMethods.paginate(customA, customB);
         return query
     }
 
     async getArrProductsData(arr) {
         const productsData = [];
-      
+
         for (const id of arr) {
-          const product = await this.getProductById(id);
-          productsData.push(product);
+            const product = await this.getProductById(id);
+            productsData.push(product);
         }
-      
+
         return productsData;
-      }
+    }
 
 }
 

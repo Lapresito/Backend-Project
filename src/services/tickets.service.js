@@ -1,4 +1,3 @@
-import { UserDTO } from "../dao/DTO/users.dto.js";
 import { TicketMethods, UserMethods } from "../dao/factory.js";
 import { v4 as uuidv4 } from 'uuid';
 export class TicketService{
@@ -15,6 +14,7 @@ export class TicketService{
         };
         let newTk = await TicketMethods.create(ticket);
         let user = await UserMethods.findOne(tk.purchaser);
+        // toDo mandar mail del tk al purchaser utilizando nodemailer
         
         await user.purchases.push(newTk)
         await user.save();

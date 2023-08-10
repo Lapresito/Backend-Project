@@ -27,4 +27,4 @@ const schema = new Schema({
   },
   purchases:[]
 }, {versionKey: false});
-export const UserModel = model('users', schema);
+export const UserModel = model('users', schema)

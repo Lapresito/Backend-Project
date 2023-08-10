@@ -32,7 +32,6 @@ export class UserService{
     async getUserTks(email){
         try {
             const user = await this.findOne(email);
-            console.log("que trae aca>????/",user)
             let userTks = user.purchases;
             return userTks;
         } catch (error) {

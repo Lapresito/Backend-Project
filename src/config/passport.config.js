@@ -57,7 +57,6 @@ export function iniPassport() {
             cart: userCart._id
           };
           let userCreated = await UserModel.create(newUser);
-          console.log(userCreated);
           console.log('User Registration succesful');
           return done(null, userCreated);
         } catch (error) {

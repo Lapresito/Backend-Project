@@ -38,7 +38,9 @@ class SessionController{
         return res.render('register', {});
     }
     register(req, res){
+        
         if(!req.user){
+
             return res.status(400).render('error', { error: error.message });
         }
         req.session.user = {_id: req.user._id, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName, rol: req.user.rol, cart: req.user.cart, purchases: req.user.purchases}

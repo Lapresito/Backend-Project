@@ -1,6 +1,8 @@
 import { CartMethods } from "../dao/factory.js"
 import { ProductService } from "../services/products.service.js"
 import { TicketService } from "./tickets.service.js";
+import Errors from "../errors/enums.js";
+import CustomError from "../errors/custom-error.js";
 
 const productService = new ProductService;
 const ticketService = new TicketService;
@@ -11,7 +13,12 @@ export class CartService {
       const carts = await CartMethods.find();
       return carts;
     } catch (error) {
-      throw new Error(error.message);
+      CustomError.createError({
+        name: "That cart doesnt exist",
+        cause: "The cart you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
+        message: "The cart you have looking for doesnt exist.",
+        code: Errors.NO_CART,
+      }) 
     }
   }
   async addCart() {
@@ -30,7 +37,12 @@ export class CartService {
       const cart = await CartMethods.findPopulatedOne(_id);
       return cart;
     } catch (error) {
-      throw new Error(error.message);
+      CustomError.createError({
+        name: "That cart doesnt exist",
+        cause: "The cart you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
+        message: "The cart you have looking for doesnt exist.",
+        code: Errors.NO_CART,
+      }) 
     }
   }
   async deleteCart(_id) {
@@ -47,7 +59,12 @@ export class CartService {
       let carts = await this.getAll();
       let checkCId = carts.find((cId) => cId._id.equals(cartId));
       if (!checkCId) {
-        throw new Error("Invalid id, cart not found");
+        CustomError.createError({
+          name: "That cart doesnt exist",
+          cause: "The cart you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
+          message: "The cart you have looking for doesnt exist.",
+          code: Errors.NO_CART,
+        }) 
       }
       let cart = await CartMethods.findOne(cartId);
       let existingProduct = cart.products.find((pId) => pId.idProduct.equals(productId));
@@ -74,7 +91,12 @@ export class CartService {
       let carts = await this.getAll();
       let checkCId = carts.find((cId) => cId._id.equals(cartId));
       if (!checkCId) {
-        throw new Error("Invalid id, cart not found");
+        CustomError.createError({
+          name: "That cart doesnt exist",
+          cause: "The cart you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
+          message: "The cart you have looking for doesnt exist.",
+          code: Errors.NO_CART,
+        }) 
       }
       let cart = await CartMethods.findOne(cartId)
 
@@ -173,7 +195,12 @@ export class CartService {
   
 
       } else {
-        throw new Error('That cart doesnt exist');
+        CustomError.createError({
+          name: "That cart doesnt exist",
+          cause: "The cart you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
+          message: "The cart you have looking for doesnt exist.",
+          code: Errors.NO_CART,
+        }) 
       }
 
     } catch (error) {

@@ -4,7 +4,7 @@ const existingCart = document.querySelector(".userCart").id;
 console.log(existingCart)
 const API_URL = "http://localhost:8080/api/carts"
 
-
+//toDo deshabiitar boton a los productos sin stock
 async function addProductToCart(id){
     const url = API_URL + `/${existingCart}/product/${id}`
     const data = {}

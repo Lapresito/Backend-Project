@@ -6,10 +6,13 @@ import cartsRouter from './routes/carts.router.js';
 import viewsRouter from './routes/views.router.js';
 import realtimeRouter from './routes/realtime.router.js';
 import sessionRouter from './routes/session.router.js'
+import mockingRouter from './routes/mocking.router.js'
 import path from 'path';
 import handlebars from 'express-handlebars';
 import passport from 'passport';
 import config from './config/config.js';
+import compression from 'express-compression';
+import errorHandler from './middlewares/error.js'
 import { __dirname } from "./utils/dirname.js";
 import { connectMongo } from './utils/mongo.js';
 import { connectSocket } from './utils/sockets.js';
@@ -20,7 +23,7 @@ const app = express();
 const PORT = config.port
 
 
-app.use(express.json());
+app.use(compression());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({
     extended: true
@@ -50,6 +53,7 @@ app.use("/api/carts", cartsRouter);
 app.use('/session', sessionRouter);
 app.use('/', viewsRouter);
 app.use('/', realtimeRouter);
+app.use('/mockingproducts', mockingRouter);
 
 const httpServer = app.listen(PORT, () => {
     console.log(__dirname);
@@ -59,9 +63,12 @@ const httpServer = app.listen(PORT, () => {
 connectMongo();
 connectSocket(httpServer);
 
+
 app.get("*", (req, res) => {
     return res.status(404).json({
         status: "error",
         message: "Not Found"
     });
 });
+
+app.use(errorHandler);
