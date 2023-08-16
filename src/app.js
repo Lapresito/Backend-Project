@@ -13,6 +13,7 @@ import passport from 'passport';
 import config from './config/config.js';
 import compression from 'express-compression';
 import errorHandler from './middlewares/error.js'
+import logger from './utils/logger.js';
 import { __dirname } from "./utils/dirname.js";
 import { connectMongo } from './utils/mongo.js';
 import { connectSocket } from './utils/sockets.js';
@@ -53,11 +54,11 @@ app.use("/api/carts", cartsRouter);
 app.use('/session', sessionRouter);
 app.use('/', viewsRouter);
 app.use('/', realtimeRouter);
-app.use('/mockingproducts', mockingRouter);
+app.use('/mocking', mockingRouter);
 
 const httpServer = app.listen(PORT, () => {
-    console.log(__dirname);
-    console.log(`App listening on port http://localhost:${PORT}`);
+    logger.info(__dirname);
+    logger.info(`App listening on port http://localhost:${PORT}`);
 });
 
 connectMongo();

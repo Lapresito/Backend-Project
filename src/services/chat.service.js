@@ -1,4 +1,5 @@
 import { ChatMethods } from '../dao/factory.js';
+import logger from '../utils/logger.js';
 
 export class ChatService{
     async getAll(){
@@ -6,6 +7,7 @@ export class ChatService{
             const messages = await ChatMethods.findLeaned();
             return messages;
         } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
             throw new Error(error.message);
         }
     }
@@ -18,9 +20,10 @@ export class ChatService{
             }
             const newMessage = {user: user, message: msg}
             const newMsg = await ChatMethods.create(newMessage);
-            console.log(`New message from ${user}`);
+            logger.info(`New message from ${user}`);
             return newMsg;
         } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
             throw new Error(error.message);
         }
 

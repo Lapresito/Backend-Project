@@ -1,4 +1,5 @@
 import config from '../config/config.js';
+import logger from '../utils/logger.js';
 
 export let CartMethods;
 export let ProductMethods;
@@ -9,7 +10,7 @@ export let UserMethods;
 
 switch (config.persistence) {
   case 'MONGO':
-    console.log('Persistence with Mongo')
+    logger.info('Persistence with Mongo')
     const { cartModel } = await import('../dao/mongo/classes/carts.dao.js');
     CartMethods = cartModel;
     const { productModel } = await import('../dao/mongo/classes/products.dao.js');
@@ -23,7 +24,7 @@ switch (config.persistence) {
 
     break;
   case 'FS':
-    console.log('Persistence with FileSystem');
+    logger.info('Persistence with FileSystem');
     const { cartManager } = await import('../dao/fs/classes/CartsManager.js');
     CartMethods = cartManager;
     const { productManager } = await import('../dao/fs/classes/ProductManager.js');

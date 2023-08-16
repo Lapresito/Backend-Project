@@ -4,15 +4,16 @@ const productService = new ProductService();
 import { ChatService } from '../services/chat.service.js';
 const chatService = new ChatService();
 import { ProductModel } from "../dao/mongo/models/products.model.js";
+import logger from './logger.js';
 
 export function connectSocket(httpServer){
   const socketServer = new Server(httpServer);
 
   socketServer.on('connection', (socket) => {
-      console.log(`New user connected: ${socket.id}`);
+      logger.info(`New user connected: ${socket.id}`);
       socket.on('newProduct', async (newProduct) => {
           try {
-              console.log(JSON.stringify(newProduct));
+              logger.info(JSON.stringify(newProduct));
               await productService.addProduct(newProduct); 
               const query = await ProductModel.paginate({}, {limit: 40});
                 const { docs, ...rest } = query;
@@ -21,6 +22,7 @@ export function connectSocket(httpServer){
                 });
               socketServer.emit('updatedProducts', products);
           } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
              throw new Error(error.message);
           }
       });
@@ -30,6 +32,7 @@ export function connectSocket(httpServer){
               const products = await productService.getAll();
               socketServer.emit('updatedProducts', products);
           } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
               throw new Error(error.message); 
           }
       });
@@ -39,6 +42,7 @@ export function connectSocket(httpServer){
             const allMsgs = await chatService.getAll();
             socketServer.emit('updatedMessages', allMsgs);
         } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
             throw new Error(error.message); 
         }
       })

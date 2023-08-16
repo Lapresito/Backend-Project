@@ -1,5 +1,6 @@
 import { CartService } from "../services/carts.service.js";
 import { UserService } from "../services/users.service.js";
+import logger from "../utils/logger.js";
 const cartService = new CartService;
 const userService = new UserService;
 
@@ -12,13 +13,15 @@ class CartController {
                 status: "success",
                 message: 'Carts list',
                 payload: carts
-            })
+            });
+            logger.http('HTTP request is successful');
         } catch (error) {
+            logger.error(error);
             res.status(400).json({
                 status: "error",
                 errorName: error.name,
                 error: error.message
-            })
+            });
         }
     }
 
@@ -29,8 +32,10 @@ class CartController {
                 status: "success",
                 message: 'Cart created successfuly',
                 payload: newCart
-            })
+            });
+            logger.http('HTTP request is successful');
         } catch (error) {
+            logger.error(error)
             res.status(400).json({
                 status: "error",
                 errorName: error.name,
@@ -47,8 +52,10 @@ class CartController {
                 message: `Cart with id:${id}`,
                 payload: cart
             })
+            logger.http('HTTP request is successful');
 
         } catch (error) {
+            logger.error(error)
             res.status(400).json({
                 status: "error",
                 errorName: error.name,
@@ -66,9 +73,11 @@ class CartController {
                 status: "success",
                 message: `Product with id:${pid} was added successfully to cart with id ${cid}`,
                 payload: cart
-            })
+            });
+            logger.http('HTTP request is successful');
 
         } catch (error) {
+            logger.error(error)
             res.status(400).json({
                 status: "error",
                 errorName: error.name,
@@ -85,8 +94,10 @@ class CartController {
                 status: "success",
                 message: `The cart with id: ${id} was deleted succesfully!`,
                 payload: cart
-            })
+            });
+            logger.http('HTTP request is successful');
         } catch (error) {
+            logger.error(error)
             res.status(400).json({
                 status: "error",
                 errorName: error.name,
@@ -106,9 +117,11 @@ class CartController {
                 status: "success",
                 message: `Product with id:${pid} was deleted successfully from cart with id ${cid}`,
                 payload: cart
-            })
+            });
+            logger.http('HTTP request is successful');
 
         } catch (error) {
+            logger.error(error)
             res.status(400).json({
                 status: "error",
                 errorName: error.name,
@@ -127,8 +140,10 @@ class CartController {
                 status: "success",
                 message: `Cart with id ${cid} was uploaded successfuly`,
                 payload: cart
-            })
+            });
+            logger.http('HTTP request is successful');
         } catch (error) {
+            logger.error(error)
             res.status(400).json({
                 status: "error",
                 errorName: error.name,
@@ -145,8 +160,10 @@ class CartController {
                 status: "success",
                 message: `Cart with id ${cid} was uploaded successfuly`,
                 payload: cart
-            })
+            });
+            logger.http('HTTP request is successful');
         } catch (error) {
+            logger.error(error)
             res.status(400).json({
                 status: "error",
                 errorName: error.name,
@@ -161,8 +178,10 @@ class CartController {
             await cartService.purchase(cid, user);
             let tksData = await userService.getUserTks(user.email);
             let tkData = await tksData[tksData.length - 1];
-            return res.status(200).render('purchased', {tkData})
+            logger.http('HTTP request is successful');
+            return res.status(200).render('purchased', {tkData});
         } catch (error) {
+            logger.error(error)
             return res.status(500).render('error',{error: error.message})
         }
     }

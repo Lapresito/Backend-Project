@@ -1,4 +1,5 @@
 import { UserMethods } from "../dao/factory.js";
+import logger from "../utils/logger.js";
 
 export class UserService{
 
@@ -7,6 +8,7 @@ export class UserService{
             const users = await UserMethods.find();
             return users;
         } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
             throw new Error(error.message);
         }
     }
@@ -17,6 +19,7 @@ export class UserService{
             const updatedUser = await UserMethods.updateOne();
             
         } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
             throw new Error(error.message);
         }
     }
@@ -26,6 +29,7 @@ export class UserService{
             return user;
             
         } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
             throw new Error(error.message);
         }
     }
@@ -35,6 +39,7 @@ export class UserService{
             let userTks = user.purchases;
             return userTks;
         } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
             throw new Error(error.message);
         }
     }

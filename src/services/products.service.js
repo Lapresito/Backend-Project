@@ -2,6 +2,7 @@ import { ProductMethods } from "../dao/factory.js";
 import Errors from "../errors/enums.js";
 import CustomError from "../errors/custom-error.js";
 import { generateProductErrorInfo } from "../errors/product-error.js";
+import logger from "../utils/logger.js";
 
 export class ProductService {
     async getAll(page, limit, sort, query) {
@@ -38,6 +39,7 @@ export class ProductService {
             }
             return data;
         } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
             throw new Error(error.message);
         }
     }
@@ -54,6 +56,7 @@ export class ProductService {
                 category: category
             }
             if (!code || !title || !description || !price || !thumbnail || !stock || !category) {
+                logger.warn("Empty fields making a product")
                 CustomError.createError({
                     name: "Empty fields",
                     cause: generateProductErrorInfo(product),
@@ -62,7 +65,7 @@ export class ProductService {
                 });
             }
         } catch (error) {
-            console.log(error)
+            logger.error({error: error, errorMsg: error.message})
             throw new Error(error.message);
 
         }
@@ -90,6 +93,7 @@ export class ProductService {
             });
             let checkCode = products.find((pCode) => pCode.code === product.code);
             if (checkCode) {
+                logger.warn('Already exists a product with that code')
                 throw new Error('Already exists a product with that code');
             }
             const newProduct = await ProductMethods.create({
@@ -103,10 +107,10 @@ export class ProductService {
                 category: product.category,
 
             });
-            console.log(`Product ${product.title} added succesfully`);
+            logger.info(`Product ${product.title} added succesfully`);
             return newProduct;
         } catch (error) {
-            console.log(error.message)
+            logger.error({error: error, errorMsg: error.message})
             throw new Error(error.message);
         }
     }
@@ -115,6 +119,7 @@ export class ProductService {
             const product = await ProductMethods.findOne(_id);
             return product;
         } catch (error) {
+            logger.warn("That product doesnt exist")
             CustomError.createError({
                 name: "That product doesnt exist",
                 cause: "The product you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
@@ -127,6 +132,7 @@ export class ProductService {
     async updateProduct(_id, product) {
         try {
             if (!_id) {
+                logger.warn("That product doesnt exist")
                 CustomError.createError({
                     name: "That product doesnt exist",
                     cause: "The product you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
@@ -136,18 +142,20 @@ export class ProductService {
             }
             this.productValidation(product.title, product.description, product.price, product.thumbnail, product.code, product.stock, product.category);
             const updatedProduct = await ProductMethods.updateOne(_id, product);
-            console.log(`The product with id: ${_id} was updated succesfully!`);
+            logger.info(`The product with id: ${_id} was updated succesfully!`);
             return updatedProduct;
         } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
             throw new Error(error.message);
         }
     }
     async deleteProduct(_id) {
         try {
             const deletedProduct = await ProductMethods.deleteProduct(_id);
-            console.log(`The product with id: ${_id} was deleted succesfully!`);
+            logger.info(`The product with id: ${_id} was deleted succesfully!`);
             return deletedProduct;
         } catch (error) {
+            logger.warn("That product doesnt exist")
             CustomError.createError({
                 name: "That product doesnt exist",
                 cause: "The product you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
@@ -157,24 +165,35 @@ export class ProductService {
         }
     }
     async getProductData(page) {
-        let customA = {}
-        let customB = {
-            page: page || 1,
-            limit: 3
+        try {
+            let customA = {}
+            let customB = {
+                page: page || 1,
+                limit: 3
+            }
+            const query = await ProductMethods.paginate(customA, customB);
+            return query
+        } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
+            throw new Error(error.message);
         }
-        const query = await ProductMethods.paginate(customA, customB);
-        return query
     }
 
     async getArrProductsData(arr) {
-        const productsData = [];
-
-        for (const id of arr) {
-            const product = await this.getProductById(id);
-            productsData.push(product);
+        try {
+            const productsData = [];
+    
+            for (const id of arr) {
+                const product = await this.getProductById(id);
+                productsData.push(product);
+            }
+    
+            return productsData;
+            
+        } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
+            throw new Error(error.message);
         }
-
-        return productsData;
     }
 
 }

@@ -17,5 +17,6 @@ export default {
     clientSecret: process.env.CLIENT_SECRET,
     adminEmail: process.env.ADMIN_EMAIL,
     adminPassword: process.env.ADMIN_PASSWORD,
-    persistence: process.env.PERSISTENCE
+    persistence: process.env.PERSISTENCE,
+    mode: process.env.MODE
 }

@@ -3,6 +3,7 @@ import local from 'passport-local';
 import GitHubStrategy from 'passport-github2';
 import fetch from 'node-fetch'
 import config from '../config/config.js';
+import logger from '../utils/logger.js';
 import { createHash, isValidPassword } from '../utils/bcrypt.js';
 import { UserModel } from '../dao/mongo/models/users.model.js';
 import { CartService } from '../services/carts.service.js';
@@ -17,16 +18,17 @@ export function iniPassport() {
       try {
         const user = await UserModel.findOne({ email: username });
         if (!user) {
-          console.log('User not found with email ' + username);
+          logger.warn('User not found with email ' + username);
           return done(null, false);
         }
         if (!isValidPassword(password, user.password[0])) {
-          console.log('Invalid password');
+          logger.warn('Invalid password');
           return done(null, false);
         }
 
         return done(null, user);
       } catch (error) {
+        logger.fatal(error)
         return done(error);
       }
     })
@@ -42,12 +44,12 @@ export function iniPassport() {
           const { email, firstName, lastName } = req.body;
           let user = await UserModel.findOne({ email: username });
           if (user) {
-            console.log('User already exists');
+            logger.warn('User already exists');
             return done(null, false);
           }
 
           let userCart = await cartService.addCart()
-          console.log(userCart)
+          logger.info(userCart)
           const newUser = {
             email,
             firstName,
@@ -57,11 +59,11 @@ export function iniPassport() {
             cart: userCart._id
           };
           let userCreated = await UserModel.create(newUser);
-          console.log('User Registration succesful');
+          logger.info('User Registration succesful');
           return done(null, userCreated);
         } catch (error) {
-          console.log('Error in register');
-          console.log(error);
+          logger.error('Error in register');
+          logger.error(error);
           return done(error);
         }
       }
@@ -105,14 +107,15 @@ export function iniPassport() {
               cart: userCart._id
             };
             let userCreated = await UserModel.create(newUser);
-            console.log('User registration succesful');
+            logger.info('User registration succesful');
             return done(null, userCreated);
           } else {
-            console.log('User already exists');
+            logger.warn('User already exists');
             return done(null, user);
           }
         } catch (error) {
-          console.log('Error in authentication with github');
+          logger.error('Error in authentication with github');
+          logger.error(error)
           return done(error);
         }
       }

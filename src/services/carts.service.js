@@ -1,6 +1,7 @@
 import { CartMethods } from "../dao/factory.js"
 import { ProductService } from "../services/products.service.js"
 import { TicketService } from "./tickets.service.js";
+import logger from '../utils/logger.js'
 import Errors from "../errors/enums.js";
 import CustomError from "../errors/custom-error.js";
 
@@ -13,12 +14,17 @@ export class CartService {
       const carts = await CartMethods.find();
       return carts;
     } catch (error) {
-      CustomError.createError({
-        name: "That cart doesnt exist",
-        cause: "The cart you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
-        message: "The cart you have looking for doesnt exist.",
+      logger.error({
+        name: error.name,
+        message: error.message
+      })
+    CustomError.createError({
+        name: "Something wrong happend, we cannot show you the carts",
+        cause: "Something wrong with the db happend, we cannot complete the request to the db",
+        message: "Please try again",
         code: Errors.NO_CART,
       }) 
+      
     }
   }
   async addCart() {
@@ -26,9 +32,10 @@ export class CartService {
       let newCart = await CartMethods.create({
         products: []
       })
-      console.log('Cart was created succesfully');
+      logger.info('Cart was created succesfully');
       return newCart;
     } catch (error) {
+      logger.error({error: error, errorMsg: error.message})
       throw new Error(error.message);
     }
   }
@@ -37,7 +44,11 @@ export class CartService {
       const cart = await CartMethods.findPopulatedOne(_id);
       return cart;
     } catch (error) {
-      CustomError.createError({
+      logger.warn({
+        name: error.name,
+        message: error.message
+      })
+     CustomError.createError({
         name: "That cart doesnt exist",
         cause: "The cart you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
         message: "The cart you have looking for doesnt exist.",
@@ -51,7 +62,16 @@ export class CartService {
       const cart = await this.getCartById(_id)
       return cart;
     } catch (error) {
-      throw new Error(error.message);
+      logger.warn({
+        name: error.name,
+        message: error.message
+      });
+      CustomError.createError({
+        name: "That cart doesnt exist",
+        cause: "The cart you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
+        message: "The cart you have looking for doesnt exist.",
+        code: Errors.NO_CART,
+      });
     }
   }
   async addProductToCart(productId, cartId) {
@@ -59,6 +79,7 @@ export class CartService {
       let carts = await this.getAll();
       let checkCId = carts.find((cId) => cId._id.equals(cartId));
       if (!checkCId) {
+        logger.warn("That cart doesnt exist");
         CustomError.createError({
           name: "That cart doesnt exist",
           cause: "The cart you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
@@ -80,8 +101,9 @@ export class CartService {
 
       await cart.save();
 
-      console.log(`Product ${productId} was added successfully to cart ${cartId}`);
+      logger.info(`Product ${productId} was added successfully to cart ${cartId}`);
     } catch (error) {
+      logger.error({error: error, errorMsg: error.message})
       throw new Error(error.message);
     }
   }
@@ -91,6 +113,7 @@ export class CartService {
       let carts = await this.getAll();
       let checkCId = carts.find((cId) => cId._id.equals(cartId));
       if (!checkCId) {
+        logger.warn("That cart doesnt exist");
         CustomError.createError({
           name: "That cart doesnt exist",
           cause: "The cart you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
@@ -108,11 +131,18 @@ export class CartService {
           existingProduct.quantity -= 1;
         }
       } else {
-        throw new Error(`Product with id: ${productId} was not found in the cart with id:${cartId}`);
+        logger.warn(`Product with id: ${productId} was not found in the cart with id:${cartId}`)
+        CustomError.createError({
+          name: "That product doesnt exist",
+          cause: "The product you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
+          message: `Product with id: ${productId} was not found in the cart with id:${cartId}`,
+          code: Errors.NO_PRODUCT,
+      })
       }
       await cart.save();
-      console.log(`Product ${productId} was deleted successfully from cart ${cartId}`);
+      logger.info(`Product ${productId} was deleted successfully from cart ${cartId}`);
     } catch (error) {
+      logger.error({error: error, errorMsg: error.message})
       throw new Error(error.message);
     }
   }
@@ -124,7 +154,7 @@ export class CartService {
         let cart = await CartMethods.findOne(cartId)
         let newCart = cart.products = cartByUser.products
         await cart.save();
-        console.log(`The products of cart with id:${cartId} was updated succesfuly`)
+        logger.info(`The products of cart with id:${cartId} was updated succesfuly`)
         return newCart;
       } else {
         //modifica cantidad
@@ -134,12 +164,19 @@ export class CartService {
         if (existingProduct) {
           existingProduct.quantity = cartByUser.quantity
         } else {
-          throw new Error(`Product with id: ${productId} was not found in the cart with id:${cartId}`);
+          logger.warn(`Product with id: ${productId} was not found in the cart with id:${cartId}`)
+          CustomError.createError({
+            name: "That product doesnt exist",
+            cause: "The product you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
+            message: `Product with id: ${productId} was not found in the cart with id:${cartId}`,
+            code: Errors.NO_PRODUCT,
+        })
         }
         await cart.save();
         return cart;
       }
     } catch (error) {
+      logger.error({error: error, errorMsg: error.message})
       throw new Error(error.message);
     }
   }
@@ -168,6 +205,7 @@ export class CartService {
         }
         for(let i = 0; i < productsQuantity.length; i++){
           if (productsQuantity[i] > stocks[i]) {
+            logger.warn(`No stock on product ${productsData[i].title}`)
             throw new Error(`No stock on product ${productsData[i].title}`);
           }
         }
@@ -195,6 +233,7 @@ export class CartService {
   
 
       } else {
+        logger.warn("That cart doesnt exist")
         CustomError.createError({
           name: "That cart doesnt exist",
           cause: "The cart you have looking for doesnt exist in db. Error in find it, it could be a wrong id, please check it",
@@ -204,6 +243,7 @@ export class CartService {
       }
 
     } catch (error) {
+      logger.error({error: error, errorMsg: error.message})
       throw new Error(error.message);
     }
 
