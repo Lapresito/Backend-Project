@@ -221,10 +221,9 @@ export class CartService {
             "thumbnail": prod.thumbnail,
             "code": prod.code,
             "stock": prod.stock - prodQuan,
-            "category": prod.category
+            "category": prod.category,
+            "owner": prod.owner
           }
-
-          
           await productService.updateProduct(productIds[i],updatedProd);
           //clearing cart
           await CartMethods.updateOne(cartId);

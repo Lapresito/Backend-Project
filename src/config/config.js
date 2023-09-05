@@ -3,7 +3,7 @@ import { Command } from 'commander';
 
 const program = new Command();
 
-program.option('--mode <mode>', 'Work mode', 'DEVELOPMENT');
+program.option('--mode <mode>', 'PRODUCTION', 'DEVELOPMENT');
 program.parse();
 
 dotenv.config({
@@ -11,6 +11,7 @@ dotenv.config({
 })
 
 export default {
+    mode: process.env.MODE,
     port: process.env.PORT,
     mongoUrl: process.env.MONGO_URL,
     clientId: process.env.CLIENT_ID,
@@ -18,5 +19,4 @@ export default {
     adminEmail: process.env.ADMIN_EMAIL,
     adminPassword: process.env.ADMIN_PASSWORD,
     persistence: process.env.PERSISTENCE,
-    mode: process.env.MODE
 }

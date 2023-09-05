@@ -1,5 +1,4 @@
 <h1>Profile</h1>
-<a href="/cart/{{user.cart}}">My cart🛒</a>
 <div>
     <h2>Name: {{user.firstName}}</h2>
     <h2>Lastname: {{user.lastName}}</h2>
@@ -7,7 +6,11 @@
     <h3>Rol: {{user.rol}}</h3>
 </div>
 <div>
-<a href="/session/products">Have a look on our products</a>
+<a href="/session/products">Manage products</a>
+</div>
+
+<div>
+<a href="/session/admin">Manage users</a>
 </div>
 
 <a href="/session/logout">Logout</a>

@@ -11,6 +11,7 @@ export class ProductDTO{
             this.code =  product.code || uuidv4(),
             this.stock =  product.stock  || 0,
             this.category  =  product.category
+            this.owner = product.owner || 'admin'
         
     }
 }

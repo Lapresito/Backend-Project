@@ -1,0 +1,51 @@
+ <a href="/session/profile">Back to profile</a>
+ 
+ <div id="formForNewProduct">
+        <h1>Fill the form to upload a new product</h1>
+        <form id="form.products">
+            <label for="title">
+                 Enter product title:
+                <input type="text" name="title" id="title" placeholder="Title">
+            </label>    
+            <label for="description">
+                 Enter product description:
+                <input type="text" name="description" id="description" placeholder="Description">
+            </label>
+            <label for="price">
+                 Enter product price:
+                <input type="number" name="price" id="price" placeholder="Price">
+            </label>
+            <label for="stock">
+                 Enter product stock:
+                <input type="number" name="stock" id="stock" placeholder="Stock">
+            </label>
+            <label for="code">
+                 Enter product code:
+                <input type="text" name="code" id="code" placeholder="Code">
+            </label>
+            <label for="category">
+                 Select category
+                <select id="category">
+                    <option value="Clothes">Clothes</option>
+                    <option value="Shoes">Shoes</option>
+                    <option value="Bags">Bags</option>
+                </select>
+            </label>
+            <label for="thumbnail">
+                Thumbnail
+                <input type="text" id="thumbnail" name="thumbnail" placeholder="Image URL">
+            </label>
+            <label for="owner">
+                 Owner
+                <select id="owner">
+                    <option value="{{email}}">{{email}}</option>
+                </select>
+            </label>
+            <label for="send">
+                <input type="submit" id="send" value="Send">
+            </label>
+        </form>
+    </div>
+</div>
+
+ <script src="/js/uploadprod.js"></script>

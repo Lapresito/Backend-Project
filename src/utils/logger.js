@@ -1,11 +1,7 @@
 import winston from "winston";
 import config from '../config/config.js';
-import path from 'path';
-import { __dirname } from "./dirname.js";
 
 
-const logPath = path.join(__dirname, "/errors/errors.log")
-console.log(logPath)
 let logger 
 switch (config.mode) {
   case 'DEVELOPMENT':
@@ -48,6 +44,8 @@ switch (config.mode) {
         }),
       ],
     });
+
+    logger.info(`CONFIG MODE: ${config.mode}`);
     
     
     break;
@@ -75,6 +73,7 @@ switch (config.mode) {
         }),
       ],
     });
+    logger.info(`CONFIG MODE: ${config.mode}`);
     break;
   default:
     break;

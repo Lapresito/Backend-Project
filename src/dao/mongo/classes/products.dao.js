@@ -48,6 +48,10 @@ class ProductClass{
         const deletedProduct = await ProductModel.deleteOne({_id: id});
         return deletedProduct;
     }
+    async getProductbyEmail(email){
+        const product = await ProductModel.find({ owner: email});
+        return product
+    }
 
 }
 

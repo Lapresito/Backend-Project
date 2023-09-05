@@ -1,12 +1,12 @@
 import express from "express";
-import { goToLogin, isAdmin, isUser } from "../middlewares/authenticator.js";
+import { goToLogin, isAdmin, isPremium, isUser } from "../middlewares/authenticator.js";
 import { sessionController } from "../controllers/session.controller.js";
 import passport from "passport";
 
 const sessionRouter = express.Router();
 
 sessionRouter.get('/logout', sessionController.logout);
-sessionRouter.get('/profile', goToLogin, isUser, sessionController.goToProfile);
+sessionRouter.get('/profile', goToLogin,  isUser, sessionController.goToProfile);
 sessionRouter.get('/github', passport.authenticate('github', { scope: ['user:email'] }));
 sessionRouter.get('/githubcallback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
     req.session.user = req.user;
@@ -21,5 +21,6 @@ sessionRouter.get('/failregister', sessionController.goToFailRegister)
 sessionRouter.get('/products', isUser, sessionController.getLogedProducts)
 sessionRouter.get('/admin', isAdmin, sessionController.admin);
 sessionRouter.get('/current', isUser, sessionController.currentSession)
+sessionRouter.get('/myproducts',isUser, isPremium, sessionController.myProducts);
 
   export default sessionRouter;

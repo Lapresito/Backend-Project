@@ -18,6 +18,11 @@ export function isAdmin(req, res, next) {
     return res.status(403).render('error', { error: 'You have no access, authorization is required' });
   }
 
+export function isPremium(req,res,next){
+  if((req.session.user.email === config.adminEmail && req.session.user.password === config.adminPassword) || req.session.user.rol === 'premium'){
+    return next()
+  }
+}
 
 export function goToLogin(req, res, next){
   if (req.session?.user?.email) {

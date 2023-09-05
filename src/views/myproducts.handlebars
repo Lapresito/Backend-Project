@@ -1,0 +1,19 @@
+    <div>
+        <a href="/session/profile">Back to profile</a>
+    </div>
+
+    <div id="myProds">
+                {{#each prods }}
+                <div id="{{this.id}}" style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: solid 3px blue; width: 100%; heigth: 100%">
+                    <h2>{{this.title}}</h2>
+                    <img src={{this.thumbnail}} style="max-width: 100px; max-height: 200px">
+                    <h3>Price: {{this.price}}</h4>
+                    <p>Stock: {{this.stock}}</p>
+                    <p>Category: {{this.category}}</p>
+                    <button onclick="deleteItem('{{this.id}}')">Delete</button>
+                </div>
+                {{/each}}
+    </div>
+
+
+    <script src="/js/myproducts.js"></script>

@@ -44,7 +44,7 @@ export class ProductService {
         }
     }
 
-    async productValidation(title, description, price, thumbnail, code, stock, category) {
+    async productValidation(title, description, price, thumbnail, code, stock, category, owner) {
         try {
             let product = {
                 title: title,
@@ -53,9 +53,10 @@ export class ProductService {
                 thumbnail: thumbnail,
                 code: code,
                 stock: stock,
-                category: category
+                category: category,
+                owner: owner || 'admin'
             }
-            if (!code || !title || !description || !price || !thumbnail || !stock || !category) {
+            if (!code || !title || !description || !price || !thumbnail || !stock || !category || !owner) {
                 logger.warn("Empty fields making a product")
                 CustomError.createError({
                     name: "Empty fields",
@@ -72,7 +73,7 @@ export class ProductService {
     }
     async addProduct(product) {
         try {
-            await this.productValidation(product.title, product.description, product.price, product.thumbnail, product.code, product.stock, product.category);
+            await this.productValidation(product.title, product.description, product.price, product.thumbnail, product.code, product.stock, product.category, product.owner);
             let customA = {}
             let customB = {
                 limit: 40
@@ -105,6 +106,7 @@ export class ProductService {
                 stock: product.stock,
                 status: true,
                 category: product.category,
+                owner: product.owner || 'admin'
 
             });
             logger.info(`Product ${product.title} added succesfully`);
@@ -140,7 +142,7 @@ export class ProductService {
                     code: Errors.NO_PRODUCT,
                 });
             }
-            this.productValidation(product.title, product.description, product.price, product.thumbnail, product.code, product.stock, product.category);
+            this.productValidation(product.title, product.description, product.price, product.thumbnail, product.code, product.stock, product.category, product.owner);
             const updatedProduct = await ProductMethods.updateOne(_id, product);
             logger.info(`The product with id: ${_id} was updated succesfully!`);
             return updatedProduct;
@@ -188,6 +190,17 @@ export class ProductService {
                 productsData.push(product);
             }
     
+            return productsData;
+            
+        } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
+            throw new Error(error.message);
+        }
+    }
+
+    async getProductByOwner(email){
+        try {
+            const productsData = await ProductMethods.getProductbyEmail(email);
             return productsData;
             
         } catch (error) {

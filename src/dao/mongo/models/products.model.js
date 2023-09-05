@@ -9,7 +9,8 @@ const schema = new Schema({
     code: { type: String, required: true, max: 100, unique: true },
     stock: { type: Number, required: true, max: 200000000 },
     status: {type: Boolean},
-    category: { type: String, required: true, max: 100 }
+    category: { type: String, required: true, max: 100 },
+    owner: { type: String }
 }, { versionKey: false });
 
 schema.plugin(mongoosePaginate);
