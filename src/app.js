@@ -14,6 +14,8 @@ import config from './config/config.js';
 import compression from 'express-compression';
 import errorHandler from './middlewares/error.js'
 import logger from './utils/logger.js';
+import swaggerUiExpress from "swagger-ui-express";
+import specs from './utils/swagger.js';
 import { __dirname } from "./utils/dirname.js";
 import { connectMongo } from './utils/mongo.js';
 import { connectSocket } from './utils/sockets.js';
@@ -48,6 +50,7 @@ iniPassport();
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);

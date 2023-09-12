@@ -12,6 +12,15 @@ class UserClass{
         const user = await UserModel.findOne({ email: email});
         return user;
     }
+    async changeRol(email){
+        const user = await UserModel.findOne({ email: email});
+        await UserModel.updateOne({email: email},  {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            rol: 'premium'
+        });
+    }
 }
 
 

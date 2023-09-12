@@ -22,5 +22,6 @@ sessionRouter.get('/products', isUser, sessionController.getLogedProducts)
 sessionRouter.get('/admin', isAdmin, sessionController.admin);
 sessionRouter.get('/current', isUser, sessionController.currentSession)
 sessionRouter.get('/myproducts',isUser, isPremium, sessionController.myProducts);
+sessionRouter.post('/makepremium/:uid', isAdmin, sessionController.makePremium);
 
   export default sessionRouter;

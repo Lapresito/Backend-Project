@@ -43,4 +43,13 @@ export class UserService{
             throw new Error(error.message);
         }
     }
+    async makeUserPremium(email){
+        try {
+            const user = await this.findOne(email);
+            
+        } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
+            throw new Error(error.message);
+        }
+    }
 }

@@ -1,0 +1,250 @@
+paths:
+  /api/carts:
+    get:
+      summary: Get all shopping carts
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Carts retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CartResponse"
+        "500":
+          description: Server error, maybe a DB issue.
+
+    post:
+      summary: Create a new shopping cart
+      tags:
+        - Carts
+      responses:
+        "201":
+          description: Cart created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartResponse"
+        "500":
+          description: Server error, maybe a DB issue.
+
+  /api/carts/{cid}:
+    get:
+      summary: Get a shopping cart by ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Cart ID you are looking for
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Cart found successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartResponse"
+        "500":
+          description: Server error, maybe a DB issue.
+
+    put:
+      summary: Update a shopping cart by ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Cart ID you are looking for
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Cart was updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartResponse"
+        "500":
+          description: Server error, maybe a DB issue.
+
+    delete:
+      summary: Delete a shopping cart by ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Cart ID to delete
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Cart was deleted successfully
+
+  /api/carts/{cid}/products/{pid}:
+    post:
+      summary: Add a product to a shopping cart
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Cart ID to which you want to add a product
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: Product ID you want to add to the cart
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Product was added successfully to the cart
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartResponse"
+        "500":
+          description: Server error, maybe a DB issue.
+
+    delete:
+      summary: Remove a product from a shopping cart
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Cart ID from which you want to remove a product
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: Product ID you want to remove from the cart
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Product was removed successfully from the cart
+
+    put:
+      summary: Update the quantity of a product in a shopping cart
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Cart ID in which you want to update the product quantity
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: Product ID for which you want to update the quantity
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+                  description: New quantity for the product in the cart
+              example:
+                quantity: 5
+      responses:
+        "201":
+          description: Cart was updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartResponse"
+        "500":
+          description: Server error, maybe a DB issue.
+
+components:
+  schemas:
+    CartResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Response status (success or error)
+        message:
+          type: string
+          description: Message details
+        cart:
+          $ref: "#/components/schemas/Cart"
+      example:
+        status: success
+        message: Cart was updated successfully
+        cart:
+          _id: "12345"
+          items:
+            - product:
+                _id: "56789"
+                title: "Product A"
+                price: 10.0
+              quantity: 2
+          total: 20.0
+
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Cart ID
+        items:
+          type: array
+          description: List of items in the cart
+          items:
+            type: object
+            properties:
+              product:
+                $ref: "#/components/schemas/Product"
+              quantity:
+                type: integer
+                description: Quantity of the product in the cart
+        total:
+          type: number
+          description: Total cost of the items in the cart
+      example:
+        _id: "12345"
+        items:
+          - product:
+              _id: "56789"
+              title: "Product A"
+              price: 10.0
+            quantity: 2
+        total: 20.0
+
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Product ID
+        title:
+          type: string
+          description: Product title
+        price:
+          type: number
+          description: Product price
+      example:
+        _id: "56789"
+        title: "Product A"
+        price: 10.0
