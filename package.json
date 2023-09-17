@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon -e yaml,js ./src/app.js",
-    "start": "node ./src/app.js --mode PRODUCTION"
+    "start": "node ./src/app.js --mode PRODUCTION",
+    "test": "mocha test/supertest.test.js"
   },
   "repository": {
     "type": "git",
@@ -42,5 +43,10 @@
     "sweetalert2": "^11.6.13",
     "uuid": "^9.0.0",
     "winston": "^3.10.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.8",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3"
   }
 }

@@ -52,7 +52,6 @@ class ProductController {
     }
     async addProduct(req, res) {
         try {
-            console.log('avel', req.body)
             const product = req.body
             const productToAdd = new ProductDTO(product)
             await productService.addProduct(productToAdd)

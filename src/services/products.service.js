@@ -144,7 +144,7 @@ export class ProductService {
             }
             this.productValidation(product.title, product.description, product.price, product.thumbnail, product.code, product.stock, product.category, product.owner);
             const updatedProduct = await ProductMethods.updateOne(_id, product);
-            logger.info(`The product with id: ${_id} was updated succesfully!`);
+            logger.info(`The product with id: ${_id} was updated successfully`);
             return updatedProduct;
         } catch (error) {
             logger.error({error: error, errorMsg: error.message})
@@ -154,7 +154,7 @@ export class ProductService {
     async deleteProduct(_id) {
         try {
             const deletedProduct = await ProductMethods.deleteProduct(_id);
-            logger.info(`The product with id: ${_id} was deleted succesfully!`);
+            logger.info(`The product with id: ${_id} was deleted successfully`);
             return deletedProduct;
         } catch (error) {
             logger.warn("That product doesnt exist")
