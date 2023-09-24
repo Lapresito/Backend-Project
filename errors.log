@@ -258,3 +258,6 @@
 [31m{"level":"error","message":{"error":{"code":11000,"index":0,"keyPattern":{"title":1},"keyValue":{"title":"New Product"}},"errorMsg":"E11000 duplicate key error collection: ecommerce.products index: title_1 dup key: { title: \"New Product\" }"},"timestamp":"2023-09-17T21:00:04.744Z"}[39m
 [33m{"level":"warn","message":"Empty fields making a product"}[39m
 [31m{"level":"error","message":{"error":{"code":3,"name":"Empty fields"},"errorMsg":"Empty fields, please check it"},"timestamp":"2023-09-17T21:00:04.810Z"}[39m
+[33m{"level":"warn","message":"User not found with email lapro@gmail.com"}[39m
+[31m{"level":"error","message":{"error":{},"errorMsg":"user is not defined"}}[39m
+[31m{"level":"error","message":{"error":{},"errorMsg":"user is not defined"},"timestamp":"2023-09-24T17:38:59.729Z"}[39m

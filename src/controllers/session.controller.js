@@ -115,13 +115,6 @@ class SessionController{
             return res.status(500).render('error', { error: error.message})
         }
     }
-    async makePremium(req,res){
-        try {
-            
-        } catch (error) {
-            return res.status(500).render('error', { error: error.message})
-        }
-    }
 }
 
 export const sessionController = new SessionController

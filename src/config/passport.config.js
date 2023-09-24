@@ -26,6 +26,8 @@ export function iniPassport() {
           return done(null, false);
         }
 
+        await UserModel.updateOne({ email: user.email },{ last_connection: Date.now() } )
+
         return done(null, user);
       } catch (error) {
         logger.fatal(error)
@@ -56,7 +58,8 @@ export function iniPassport() {
             lastName,
             rol: 'user',
             password: createHash(password),
-            cart: userCart._id
+            cart: userCart._id,
+            last_connection: Date.now()
           };
           let userCreated = await UserModel.create(newUser);
           logger.info('User Registration succesful');

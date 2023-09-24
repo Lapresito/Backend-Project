@@ -5,8 +5,9 @@ import productsRouter from './routes/products.router.js';
 import cartsRouter from './routes/carts.router.js';
 import viewsRouter from './routes/views.router.js';
 import realtimeRouter from './routes/realtime.router.js';
-import sessionRouter from './routes/session.router.js'
-import mockingRouter from './routes/mocking.router.js'
+import sessionRouter from './routes/session.router.js';
+import mockingRouter from './routes/mocking.router.js';
+import usersRouter from './routes/user.router.js';
 import path from 'path';
 import handlebars from 'express-handlebars';
 import passport from 'passport';
@@ -23,7 +24,7 @@ import { iniPassport } from './config/passport.config.js';
 
 
 const app = express();
-const PORT = config.port
+const PORT = config.port;
 
 
 app.use(express.json());
@@ -52,13 +53,14 @@ app.use(passport.session());
 
 app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 
+app.use("/api/users", usersRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 
 app.use('/session', sessionRouter);
+app.use('/mocking', mockingRouter);
 app.use('/', viewsRouter);
 app.use('/', realtimeRouter);
-app.use('/mocking', mockingRouter);
 
 const httpServer = app.listen(PORT, () => {
     logger.info(__dirname);

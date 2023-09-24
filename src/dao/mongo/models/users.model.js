@@ -25,6 +25,11 @@ const schema = new Schema({
     type: String,
     required: false
   },
-  purchases:[]
+  last_connection: { 
+    type: String,
+    requeried: false
+  },
+  purchases:[],
+  documents:[{name: String, link: String}]
 }, {versionKey: false});
 export const UserModel = model('users', schema)

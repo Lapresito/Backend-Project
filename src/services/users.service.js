@@ -46,7 +46,32 @@ export class UserService{
     async makeUserPremium(email){
         try {
             const user = await this.findOne(email);
+            if(user.rol === 'user'){
+                await UserMethods.rolToPremium(email)
+            }
+            else if(user.rol === 'premium'){
+                await UserMethods.rolToUser(email)
+            }
             
+        } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
+            throw new Error(error.message);
+        }
+    }
+    async findInactivity(){
+        try {
+            const deletedUsers = await UserMethods.findInactivity();
+            return deletedUsers;
+            
+        } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
+            throw new Error(error.message);
+        }
+    }
+    async findAndDeleteInactivity(){
+        try {
+            const deletedUsers = await UserMethods.findAndDelete()
+            return deletedUsers;
         } catch (error) {
             logger.error({error: error, errorMsg: error.message})
             throw new Error(error.message);
