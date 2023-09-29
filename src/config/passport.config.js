@@ -62,6 +62,7 @@ export function iniPassport() {
             last_connection: Date.now()
           };
           let userCreated = await UserModel.create(newUser);
+          await UserModel.updateOne({ email: newUser.email }, { last_connection: Date.now() } )
           logger.info('User Registration succesful');
           return done(null, userCreated);
         } catch (error) {
@@ -107,7 +108,8 @@ export function iniPassport() {
               lastName: profile._json.name ||'Avatar',
               password: null,
               rol: 'user',
-              cart: userCart._id
+              cart: userCart._id,
+              last_connection: Date.now()
             };
             let userCreated = await UserModel.create(newUser);
             logger.info('User registration succesful');

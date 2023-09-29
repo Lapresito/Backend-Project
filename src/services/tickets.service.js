@@ -1,6 +1,7 @@
 import { TicketMethods, UserMethods } from "../dao/factory.js";
 import { v4 as uuidv4 } from 'uuid';
 import logger from "../utils/logger.js";
+import transport from "../utils/mailer.js";
 
 export class TicketService{
 
@@ -17,7 +18,23 @@ export class TicketService{
             };
             let newTk = await TicketMethods.create(ticket);
             let user = await UserMethods.findOne(tk.purchaser);
-            // toDo mandar mail del tk al purchaser utilizando nodemailer
+            await transport.sendMail({
+                from: process.env.GOOGLE_EMAIL,
+                to: `${tk.purchaser}`,
+                subject: "E-commerce purchase",
+                html: `
+                          <div>
+                              <h1>Your purchase was successful</h1>
+                              <p>Ticket details:</p>
+                              <p>Code: ${ticket.code}</p>
+                              <p>Amount: $${ticket.amount}</p>
+                              <p>${ticket.purchase_datetime}</p>
+                              <p>Purchased by: ${ticket.purchaser}</p>
+                          </div>
+                      `
+              });
+            
+            console.log("Email sent");
             
             await user.purchases.push(newTk)
             await user.save();

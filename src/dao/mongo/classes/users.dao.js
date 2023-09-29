@@ -58,6 +58,11 @@ class UserClass {
               logger.info('There are no inactive users');
             }
     }
+
+    async uploadUserImage(email, img){
+
+        const userImg = await UserModel.find({email: email})
+    }
 }
 
 

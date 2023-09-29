@@ -261,3 +261,4 @@
 [33m{"level":"warn","message":"User not found with email lapro@gmail.com"}[39m
 [31m{"level":"error","message":{"error":{},"errorMsg":"user is not defined"}}[39m
 [31m{"level":"error","message":{"error":{},"errorMsg":"user is not defined"},"timestamp":"2023-09-24T17:38:59.729Z"}[39m
+[33m{"level":"warn","message":"User already exists"}[39m

@@ -77,4 +77,14 @@ export class UserService{
             throw new Error(error.message);
         }
     }
+
+    async uploadUserImage(email, img){
+        try {
+            const userImg = await UserMethods.uploadUserImage(email);
+            return userImg;
+        } catch (error) {
+            logger.error({error: error, errorMsg: error.message})
+            throw new Error(error.message);
+        }
+    }
 }

@@ -32,6 +32,23 @@ class UserController {
         }
     }
 
+    async uploadProfileImg(req, res){
+        try {
+            const img = req.body;
+            img.picture = 'http://localhost:8000/' + req.file.filename;
+            
+            
+            res.status(200).json({
+                status: "success",
+                message: 'Profile image was uploaded successfully',
+                payload: { name: img.name, link: img.picture }
+            })
+            
+        } catch (error) {
+            return res.status(500).render('error', { error: error.message})
+        }
+    }
+
 }
 
 export const usersController = new UserController;
