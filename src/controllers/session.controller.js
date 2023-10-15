@@ -115,6 +115,45 @@ class SessionController{
             return res.status(500).render('error', { error: error.message})
         }
     }
+    async renderRecoverPass(req, res){
+        try {
+            res.render('recover-pass', {});
+        } catch (error) {
+            return res.status(500).render('error', { error: error.message})
+        }
+    }
+    async recoverPass(req, res){
+        try {
+            const {email} = req.body;
+            const recoveryCode = await userService.recoverPassword(email);
+            if(!recoveryCode){
+                res.status(500).render('checked-email2',)
+            }else{
+                res.status(500).render('checked-email', {recoveryCode})
+            }
+            
+        } catch (error) {
+            return res.status(500).render('error', { error: error.message})
+        }
+    }
+    async renderVerificationRecovery(req, res){
+        try {
+            res.status(500).render('check-recover',{})
+            
+        } catch (error) {
+            return res.status(500).render('error', { error: error.message})
+        }
+    }
+    async verifyRecover(req, res){
+        try {
+            const verify = req.body;
+            await userService.verifyRecover(verify)
+            return res.status(500).render('login');
+        } catch (error) {
+            return res.status(500).render('error', { error: error.message})
+        }
+
+    }
 }
 
 export const sessionController = new SessionController

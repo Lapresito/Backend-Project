@@ -34,8 +34,6 @@ export class TicketService{
                       `
               });
             
-            console.log("Email sent");
-            
             await user.purchases.push(newTk)
             await user.save();
             return newTk;

@@ -1,5 +1,6 @@
 import logger from "../../../utils/logger.js";
 import { UserModel } from "../models/users.model.js";
+import { RecoverCodesModel } from "../models/recoverCodes.model.js"
 
 
 
@@ -61,7 +62,17 @@ class UserClass {
 
     async uploadUserImage(email, img){
 
-        const userImg = await UserModel.find({email: email})
+        const userImg = await UserModel.find({email: email});
+    }
+    async createRecoveryCode(code){
+        await RecoverCodesModel.create(code);
+    }
+    async findCode(email){
+        const findedCode = await RecoverCodesModel.find({email: email});
+        return findedCode;
+    }
+    async updateUserPassword(email, newPassword){
+        await UserModel.updateOne({email}, {$set:{password: newPassword}});
     }
 }
 

@@ -23,4 +23,13 @@ sessionRouter.get('/admin', isAdmin, sessionController.admin);
 sessionRouter.get('/current', isUser, sessionController.currentSession)
 sessionRouter.get('/myproducts',isUser, isPremium, sessionController.myProducts);
 
+//recover password
+//create code
+sessionRouter.get('/recover-pass', sessionController.renderRecoverPass);
+sessionRouter.post('/recover-pass', sessionController.recoverPass);
+
+//check code
+sessionRouter.get('/verify-recover', sessionController.renderVerificationRecovery);
+sessionRouter.post('/verify-recover', sessionController.verifyRecover);
+
   export default sessionRouter;
