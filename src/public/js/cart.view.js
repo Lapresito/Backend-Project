@@ -1,6 +1,4 @@
 
-
-
 const url = "http://localhost:8080/session/current"
 fetch(url)
   .then(response => response.json())
@@ -15,6 +13,33 @@ fetch(url)
     console.error('Error:', error);
 
   });
+
+
+async function deleteProd(id){
+  const cart = document.querySelector('#cart')
+  const cartid = cart.textContent.trim()
+  const baseUrl = 'http://localhost:8080'; 
+  const apiUrl = `${baseUrl}/api/carts/${cartid}/product/${id}`;
+  fetch(apiUrl, {
+    method: "DELETE",
+    headers: {
+        "Content-Type": "application/json",
+    },
+})
+.then(response => {
+    if (response.ok) {
+        console.log("DELETE Successful");
+        // Puedes agregar código adicional si es necesario
+    } else {
+        console.error("Something went wrong");
+    }
+})
+.catch(error => {
+    console.error("Error in DELETE request:", error);
+});
+
+}
+
 
 
 

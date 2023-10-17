@@ -80,7 +80,7 @@ export function iniPassport() {
       {
         clientID: config.clientId,
         clientSecret: config.clientSecret,
-        callbackURL: 'http://localhost:8080/session/githubcallback',
+        callbackURL: `${config.apiUrl}${config.port}/session/githubcallback`,
       },
       async (accesToken, _, profile, done) => {
         try {

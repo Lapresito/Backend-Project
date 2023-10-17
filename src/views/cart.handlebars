@@ -1,5 +1,6 @@
 <div>
-<h1 id="userCart" style="padding: 2%">Cart: {{cart}}</h1>
+<h1 id="userCart" style="padding: 2%">Cart</h1>
+<h4 id="cart">{{cart}}</h4>
 <h4><a href="/session/profile">Back to profile</a></h4>
 </div>
 
@@ -11,6 +12,7 @@
             <h2>{{this.title}}</h2>
             <img src={{this.thumbnail}} style="max-width: 100px; max-height: 200px">
             <h2>Quantity: {{this.quantity}}</h2>
+            <button onclick="deleteProd('{{this.id}}')">Delete one</button>
         {{/each}}
         </div>
     </div>

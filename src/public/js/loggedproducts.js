@@ -6,7 +6,6 @@ const API_URL = "http://localhost:8080/api/carts"
 
 
 const user = document.getElementById('userMail').textContent
-console.log(user)
 
 
 //toDo deshabiitar boton a los productos sin stock

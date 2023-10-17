@@ -26,8 +26,9 @@ class ViewsController{
         const prodsInCart = cart.products;
         const prods = prodsInCart.map((item) => {
           const { idProduct, quantity } = item;
-          const { title, thumbnail, category } = idProduct;
+          const { id, title, thumbnail, category } = idProduct;
           return {
+            id,
             title,
             thumbnail,
             category,

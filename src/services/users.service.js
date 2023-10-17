@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { createHash, isValidPassword } from '../utils/bcrypt.js';
 import logger from "../utils/logger.js";
 import transport from "../utils/mailer.js";
+import config from "../config/config.js"
 
 
 export class UserService{
@@ -129,7 +130,7 @@ export class UserService{
                         <h1>Your verification code is:</h1>
                         <h2>${newCode}</h2>
                         <p>Remember it, and use it on here:</p>
-                        <a href='${process.env.API_URL}${process.env.PORT}/session/verify-recover'>click here</a>
+                        <a href='${config.apiUrl}${process.env.PORT}/session/verify-recover'>click here</a>
                     </div>
                 `
             });

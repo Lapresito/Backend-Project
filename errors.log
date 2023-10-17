@@ -282,3 +282,83 @@
 [31m{"level":"error","message":{"error":{"_message":"recover-codes validation failed","errors":{"code":{"kind":"string","message":"Cast to string failed for value \"{\n  email: 'tatianaivilla@gmail.com',\n  code: '$2b$10$35f.TeUua9ahXHUWnlN./OOZCjOvAoOlD5Bf7qkizriR4gUtEM.FW',\n  expire: 1697388842174\n}\" (type Object) at path \"code\"","name":"CastError","path":"code","reason":null,"stringValue":"\"{\n  email: 'tatianaivilla@gmail.com',\n  code: '$2b$10$35f.TeUua9ahXHUWnlN./OOZCjOvAoOlD5Bf7qkizriR4gUtEM.FW',\n  expire: 1697388842174\n}\"","value":{"code":"$2b$10$35f.TeUua9ahXHUWnlN./OOZCjOvAoOlD5Bf7qkizriR4gUtEM.FW","email":"tatianaivilla@gmail.com","expire":1697388842174},"valueType":"Object"},"email":{"kind":"required","message":"Path `email` is required.","name":"ValidatorError","path":"email","properties":{"message":"Path `email` is required.","path":"email","type":"required"}},"expire":{"kind":"required","message":"Path `expire` is required.","name":"ValidatorError","path":"expire","properties":{"message":"Path `expire` is required.","path":"expire","type":"required"}}},"message":"recover-codes validation failed: code: Cast to string failed for value \"{\n  email: 'tatianaivilla@gmail.com',\n  code: '$2b$10$35f.TeUua9ahXHUWnlN./OOZCjOvAoOlD5Bf7qkizriR4gUtEM.FW',\n  expire: 1697388842174\n}\" (type Object) at path \"code\", expire: Path `expire` is required., email: Path `email` is required.","name":"ValidationError"},"errorMsg":"recover-codes validation failed: code: Cast to string failed for value \"{\n  email: 'tatianaivilla@gmail.com',\n  code: '$2b$10$35f.TeUua9ahXHUWnlN./OOZCjOvAoOlD5Bf7qkizriR4gUtEM.FW',\n  expire: 1697388842174\n}\" (type Object) at path \"code\", expire: Path `expire` is required., email: Path `email` is required."},"timestamp":"2023-10-15T15:54:02.257Z"}[39m
 [31m{"level":"error","message":{"error":{},"errorMsg":"data and hash arguments required"}}[39m
 [31m{"level":"error","message":{"error":{},"errorMsg":"data and hash arguments required"},"timestamp":"2023-10-15T16:24:27.463Z"}[39m
+[33m{"level":"warn","message":"That cart doesnt exist"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."},"timestamp":"2023-10-15T22:34:53.737Z"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."}}[39m
+[31m{"level":"error"}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:34:53.738Z"}[39m
+[33m{"level":"warn","message":"That cart doesnt exist"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."},"timestamp":"2023-10-15T22:34:59.085Z"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."}}[39m
+[31m{"level":"error"}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:34:59.086Z"}[39m
+[33m{"level":"warn","message":"That cart doesnt exist"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."},"timestamp":"2023-10-15T22:35:24.048Z"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."}}[39m
+[31m{"level":"error"}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:35:24.049Z"}[39m
+[33m{"level":"warn","message":"That cart doesnt exist"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."},"timestamp":"2023-10-15T22:35:56.823Z"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."}}[39m
+[31m{"level":"error"}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:35:56.824Z"}[39m
+[33m{"level":"warn","message":"That cart doesnt exist"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."},"timestamp":"2023-10-15T22:36:59.692Z"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."}}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:36:59.693Z"}[39m
+[31m{"level":"error"}[39m
+[33m{"level":"warn","message":"That cart doesnt exist"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."},"timestamp":"2023-10-15T22:37:18.437Z"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."}}[39m
+[31m{"level":"error"}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:37:18.438Z"}[39m
+[33m{"level":"warn","message":"That cart doesnt exist"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."},"timestamp":"2023-10-15T22:37:54.196Z"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."}}[39m
+[31m{"level":"error"}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:37:54.197Z"}[39m
+[33m{"level":"warn","message":"That cart doesnt exist"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."},"timestamp":"2023-10-15T22:40:17.617Z"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."}}[39m
+[31m{"level":"error"}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:40:17.619Z"}[39m
+[33m{"level":"warn","message":"That cart doesnt exist"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."},"timestamp":"2023-10-15T22:40:32.208Z"}[39m
+[31m{"level":"error","message":{"error":{"code":1,"name":"That cart doesnt exist"},"errorMsg":"The cart you have looking for doesnt exist."}}[39m
+[31m{"level":"error"}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:40:32.209Z"}[39m
+[33m{"level":"warn","message":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"}[39m
+[31m{"level":"error","message":{"error":{"code":2,"name":"That product doesnt exist"},"errorMsg":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"},"timestamp":"2023-10-15T22:43:32.551Z"}[39m
+[31m{"level":"error","message":{"error":{"code":2,"name":"That product doesnt exist"},"errorMsg":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"}}[39m
+[31m{"level":"error"}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:43:32.552Z"}[39m
+[33m{"level":"warn","message":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"}[39m
+[31m{"level":"error","message":{"error":{"code":2,"name":"That product doesnt exist"},"errorMsg":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"},"timestamp":"2023-10-15T22:43:50.777Z"}[39m
+[31m{"level":"error","message":{"error":{"code":2,"name":"That product doesnt exist"},"errorMsg":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"}}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:43:50.778Z"}[39m
+[31m{"level":"error"}[39m
+[33m{"level":"warn","message":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"}[39m
+[31m{"level":"error","message":{"error":{"code":2,"name":"That product doesnt exist"},"errorMsg":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"},"timestamp":"2023-10-15T22:52:35.059Z"}[39m
+[31m{"level":"error","message":{"error":{"code":2,"name":"That product doesnt exist"},"errorMsg":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"}}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:52:35.060Z"}[39m
+[31m{"level":"error"}[39m
+[33m{"level":"warn","message":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"}[39m
+[31m{"level":"error","message":{"error":{"code":2,"name":"That product doesnt exist"},"errorMsg":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"},"timestamp":"2023-10-15T22:52:35.203Z"}[39m
+[31m{"level":"error","message":{"error":{"code":2,"name":"That product doesnt exist"},"errorMsg":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"}}[39m
+[31m{"level":"error"}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:52:35.203Z"}[39m
+[33m{"level":"warn","message":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"}[39m
+[31m{"level":"error","message":{"error":{"code":2,"name":"That product doesnt exist"},"errorMsg":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"},"timestamp":"2023-10-15T22:52:35.345Z"}[39m
+[31m{"level":"error","message":{"error":{"code":2,"name":"That product doesnt exist"},"errorMsg":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"}}[39m
+[31m{"level":"error"}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:52:35.346Z"}[39m
+[33m{"level":"warn","message":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"}[39m
+[31m{"level":"error","message":{"error":{"code":2,"name":"That product doesnt exist"},"errorMsg":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"},"timestamp":"2023-10-15T22:52:35.502Z"}[39m
+[31m{"level":"error","message":{"error":{"code":2,"name":"That product doesnt exist"},"errorMsg":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"}}[39m
+[31m{"level":"error"}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:52:35.503Z"}[39m
+[33m{"level":"warn","message":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"}[39m
+[31m{"level":"error","message":{"error":{"code":2,"name":"That product doesnt exist"},"errorMsg":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"},"timestamp":"2023-10-15T22:52:35.647Z"}[39m
+[31m{"level":"error","message":{"error":{"code":2,"name":"That product doesnt exist"},"errorMsg":"Product with id: 647a179ff5a778f8f5a34355 was not found in the cart with id:652c0eb97b528fbc77aa6094"}}[39m
+[31m{"level":"error"}[39m
+[31m{"level":"error","timestamp":"2023-10-15T22:52:35.648Z"}[39m

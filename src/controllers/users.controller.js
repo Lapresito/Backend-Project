@@ -1,4 +1,5 @@
 import { UserService } from "../services/users.service.js";
+import config from '../config/config.js';
 
 const usersService = new UserService
 
@@ -35,7 +36,7 @@ class UserController {
     async uploadProfileImg(req, res){
         try {
             const img = req.body;
-            img.picture = 'http://localhost:8000/' + req.file.filename;
+            img.picture = `${config.apiUrl}${config.port}/` + req.file.filename;
             
             
             res.status(200).json({
