@@ -1,6 +1,6 @@
 async function deleteItem(id) {
     try {
-        const url = `http://localhost:8080/api/products/${id}`;
+        const url = `https://lapresito.onrender.com:8080/api/products/${id}`;
         const response = await fetch(url, {
             method: "DELETE",
             headers: {

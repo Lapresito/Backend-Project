@@ -25,6 +25,7 @@ import { iniPassport } from './config/passport.config.js';
 
 const app = express();
 const PORT = config.port;
+const mongoDBURL = config.mongoDbUrl;
 
 
 app.use(express.json());
@@ -39,7 +40,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
 app.use(session({
-      store: MongoStore.create({ mongoUrl: config.mongoUrl, ttl: 86400 }),
+      store: MongoStore.create({ mongoUrl: mongoDBURL, ttl: 86400 }),
       secret: 'secret',
       resave: true,
       saveUninitialized: true,

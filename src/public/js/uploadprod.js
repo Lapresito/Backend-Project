@@ -1,50 +1,3 @@
-// const formNewProduct = document.getElementById("form.products");
-// formNewProduct.addEventListener("submit", async (e) => {
-//     e.preventDefault();
-//     let newProduct = {
-//         title: document.getElementById("title").value,
-//         description: document.getElementById("description").value,
-//         price: document.getElementById("price").value,
-//         code: document.getElementById("code").value,
-//         category: document.getElementById("category").value,
-//         thumbnail: document.getElementById("thumbnail").value,
-//         stock: document.getElementById("stock").value,
-//         owner: document.getElementById("owner").value
-//     };
-
-//     if (
-//         !newProduct.title ||
-//         !newProduct.description ||
-//         !newProduct.price ||
-//         !newProduct.code ||
-//         !newProduct.category ||
-//         !newProduct.thumbnail ||
-//         !newProduct.stock ||
-//         !newProduct.owner
-//     ) {
-//         return alert("Empty fields, please fill in all the fields");
-//     } else {
-//         try {
-//             const response = await fetch("http://localhost:8080/api/products", {
-//                 method: "POST",
-//                 headers: {
-//                     "Content-Type": "application/json"
-//                 },
-//                 body: JSON.stringify({newProduct})
-//             });
-
-//             if (response.ok) {
-//                 console.log("Product added successfully!!!!");
-//             } else {
-//                 console.error("Failed to add product");
-//             }
-//         } catch (error) {
-//             console.error("An error occurred:", error);
-//         }
-//     }
-// });
-
-
 const formNewProduct = document.getElementById("form.products");
 
 formNewProduct.addEventListener("submit", async (e) => {
@@ -83,7 +36,7 @@ function validateFormData(newProduct) {
 }
 
 async function addProduct(newProduct) {
-    const response = await fetch("http://localhost:8080/api/products", {
+    const response = await fetch("https://lapresito.onrender.com:8080/api/products", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

@@ -1,7 +1,7 @@
 async function makePremium(email) {
     console.log(email);
 
-    const baseUrl = 'http://localhost:8080'; 
+    const baseUrl = 'https://lapresito.onrender.com:8080'; 
     const apiUrl = `${baseUrl}/api/users/premium/${email}`;
 
     fetch(apiUrl, {

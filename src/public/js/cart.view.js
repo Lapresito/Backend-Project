@@ -1,5 +1,5 @@
 
-const url = "http://localhost:8080/session/current"
+const url = "https://lapresito.onrender.com:8080/session/current"
 fetch(url)
   .then(response => response.json())
   .then(data => {
@@ -18,7 +18,7 @@ fetch(url)
 async function deleteProd(id){
   const cart = document.querySelector('#cart')
   const cartid = cart.textContent.trim()
-  const baseUrl = 'http://localhost:8080'; 
+  const baseUrl = 'https://lapresito.onrender.com:8080'; 
   const apiUrl = `${baseUrl}/api/carts/${cartid}/product/${id}`;
   fetch(apiUrl, {
     method: "DELETE",
