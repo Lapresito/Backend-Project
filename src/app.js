@@ -26,6 +26,7 @@ import { iniPassport } from './config/passport.config.js';
 const app = express();
 const PORT = config.port;
 const mongoDBURL = config.mongoDbUrl;
+console.log(config.mongoDbUrl, 'funciona?')
 
 
 app.use(express.json());
