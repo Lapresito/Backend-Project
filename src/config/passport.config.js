@@ -80,7 +80,7 @@ export function iniPassport() {
       {
         clientID: config.clientId,
         clientSecret: config.clientSecret,
-        callbackURL: `${config.apiUrl}${config.port}/session/githubcallback`,
+        callbackURL: `https://lapresito-shia.onrender.com/session/githubcallback`,
       },
       async (accesToken, _, profile, done) => {
         try {

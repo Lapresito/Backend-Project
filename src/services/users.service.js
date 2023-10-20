@@ -130,7 +130,7 @@ export class UserService{
                         <h1>Your verification code is:</h1>
                         <h2>${newCode}</h2>
                         <p>Remember it, and use it on here:</p>
-                        <a href='${config.apiUrl}${process.env.PORT}/session/verify-recover'>click here</a>
+                        <a href='https://lapresito-shia.onrender.com/session/verify-recover'>click here</a>
                     </div>
                 `
             });

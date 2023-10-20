@@ -36,7 +36,7 @@ function validateFormData(newProduct) {
 }
 
 async function addProduct(newProduct) {
-    const response = await fetch("https://lapresito.onrender.com:8080/api/products", {
+    const response = await fetch("https://lapresito-shia.onrender.com/api/products", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

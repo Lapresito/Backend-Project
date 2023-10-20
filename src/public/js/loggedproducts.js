@@ -2,7 +2,7 @@
 
 const existingCart = document.querySelector(".userCart").id;
 
-const API_URL = "https://lapresito.onrender.com:8080/api/carts"
+const API_URL = "https://lapresito-shia.onrender.com/api/carts"
 
 
 const user = document.getElementById('userMail').textContent
@@ -18,7 +18,7 @@ async function addProductToCart(id) {
     };
     
     try {
-        const response = await fetch(`https://lapresito.onrender.com:8080/api/products/${id}`, options1);
+        const response = await fetch(`https://lapresito-shia.onrender.com/api/products/${id}`, options1);
         
         if (response.ok) {
             const productData = await response.json();

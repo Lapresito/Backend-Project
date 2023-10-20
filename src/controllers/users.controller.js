@@ -36,7 +36,7 @@ class UserController {
     async uploadProfileImg(req, res){
         try {
             const img = req.body;
-            img.picture = `${config.apiUrl}${config.port}/` + req.file.filename;
+            img.picture = `${config.apiUrl}/` + req.file.filename;
             
             
             res.status(200).json({

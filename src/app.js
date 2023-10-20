@@ -67,7 +67,7 @@ app.use('/', realtimeRouter);
 
 const httpServer = app.listen(PORT, () => {
     console.log(__dirname);
-    console.log(`App listening on port ${config.apiUrl}${PORT}`);
+    console.log(`App listening on port ${config.apiUrl}`);
 });
 
 connectMongo();
